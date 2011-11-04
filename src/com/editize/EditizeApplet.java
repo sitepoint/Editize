@@ -29,7 +29,6 @@ public class EditizeApplet extends JApplet implements Runnable
 	private JApplet submitButton = null;
 	private EditizeCodeWrapper codeWrapper = null;
 
-	private String licenseFileExtension = "lic";
 	private JPanel background;
 
     private boolean isFirstRun = true;
@@ -214,10 +213,6 @@ public class EditizeApplet extends JApplet implements Runnable
 
         //System.err.println("Initializing applet.");
 		aEditor = new Editize(this);
-
-		// Customizable license file extension (for Windows .NET Server)
-		p = getParameter("licenseext");
-		if (p != null) licenseFileExtension = p;
 
 		c = stringToColor(getParameter("appletbgcolor"));
 		if (c != null)
@@ -589,230 +584,6 @@ public class EditizeApplet extends JApplet implements Runnable
 	}
 
 	/**
-	 * Determines whether or not this software is licensed
-	 * for use on this server. Final to prevent overriding,
-	 * which might make copy protection easily circumventable.
-	 *
-     * @throws GeneralSecurityException if an error occurs while attempting to verify license status.
-	 * @return True if licensed, false if not.
-	 */
-	private boolean isLicensed() throws GeneralSecurityException
-	{
-		InputStream is;
-		ObjectInputStream ois;
-		PublicKey pk;
-
-		// Beta timeout
-		//if ((new Date()).after(new Date(60975694800000l))) return false;
-
-		// Get the current hostname
-		String curhost = getDocumentBase().getHost().toLowerCase();
-		if (curhost.length() == 0)
-		{
-			System.out.println("Editize running in test mode (no local hostname found).");
-			return true;
-		}
-
-		// Special exceptions
-		if (curhost.endsWith("cysticfibrosis.sitepoint.com.au") ||
-			curhost.endsWith("cysticfibrosis.com.au"))
-			return true;
-
-		// Exceptional servers (127.* and localhost) automatically authorized
-		InetAddress ip;
-		try
-		{
-			ip = InetAddress.getByName(curhost);
-			if (ip.getHostAddress().startsWith("127.") ||
-				curhost.equalsIgnoreCase("localhost"))
-				return true;
-		}
-		catch (UnknownHostException ex)
-		{
-			System.err.println(ex.getMessage());
-			throw new GeneralSecurityException("Editize could not resolve hostname '" + curhost + "' to an IP address.");
-		}
-
-		System.out.println("Hostname '" + curhost + "' resolves to IP address " + ip.getHostAddress());
-
-		try
-		{
-			// Get the public key
-			is = getClass().getResourceAsStream("pub.key");
-			ois = new ObjectInputStream(is);
-			RSAPublicKeySpec ks = new RSAPublicKeySpec(
-				(BigInteger) ois.readObject(),
-				(BigInteger) ois.readObject());
-			KeyFactory kf = KeyFactory.getInstance("RSA");
-			pk = kf.generatePublic(ks);
-		}
-		catch (Exception ex)
-		{
-			throw new GeneralSecurityException("The Editize component in use in this page is damaged ("+ex.toString()+": "+ex.getMessage()+").");
-		}
-
-		try
-		{
-			// Disregard 'www' at the front of the hostname
-			if (curhost.startsWith("www.")) curhost = curhost.substring(4);
-
-			// Keep trying to fetch licenses for enclosing domains until
-			// one is found or we reach the top-level domain
-			boolean domainLicenseRequired = false;
-			boolean hostnameLicenseFound = false;
-			do
-			{
-				// Get the signature for the licensed hostname
-				URL licURL = new URL(getCodeBase(),"editize."+curhost+"."+licenseFileExtension);
-				try
-				{
-					System.out.println("Trying to find license for: " + curhost);
-					is = licURL.openStream();
-					hostnameLicenseFound = true;
-					if (isLicenseFileValid(is, curhost, domainLicenseRequired, pk)) return true;
-					break;
-				}
-				catch (SignatureException se)
-				{
-					// Trim lowest-level domain off the hostname
-					curhost = curhost.substring(curhost.indexOf('.')+1);
-					domainLicenseRequired = true;
-				}
-				catch (ClassFormatError cfe)
-				{
-					// Trim lowest-level domain off the hostname
-					curhost = curhost.substring(curhost.indexOf('.')+1);
-					domainLicenseRequired = true;
-				}
-				catch (IOException ioe)
-				{
-					// Trim lowest-level domain off the hostname
-					curhost = curhost.substring(curhost.indexOf('.')+1);
-					domainLicenseRequired = true;
-				}
-			}
-			while (curhost.indexOf('.') >= 0);
-
-			if (!hostnameLicenseFound)
-			{
-				System.out.println("Hostname-specific license file not found. Is this a private network server?");
-
-				// Determine if we're dealing with a private network IP
-				boolean isPrivateIP = false;
-				if (ip.getHostAddress().startsWith("10.") ||
-					ip.getHostAddress().startsWith("192.168.")) isPrivateIP = true;
-				else if (ip.getHostAddress().startsWith("172."))
-				{
-					// 172.[16-31].*
-					byte[] ipaddr = ip.getAddress();
-					isPrivateIP = (ipaddr[0] == (byte)172 &&
-								   ipaddr[1] >= 16 && ipaddr[1] < 32);
-				}
-				if (!isPrivateIP)
-				{
-					System.out.println(ip.getHostAddress() + " is not a private network IP. Failed license check.");
-					return false;
-				}
-
-				System.out.println(ip.getHostAddress() + " is a private network IP! Checking for editize.lic...");
-
-				// If the current IP is a private network IP, try
-				// validating a private network license
-				domainLicenseRequired = false;
-				curhost = "localnetwork";
-				URL licURL = new URL(getCodeBase(),"editize."+licenseFileExtension);
-				is = licURL.openStream();
-				if (isLicenseFileValid(is, curhost, domainLicenseRequired, pk)) return true;
-			}
-
-			return false;
-		}
-		catch (ClassNotFoundException ex)
-		{
-			throw new GeneralSecurityException("A required Java class could not be found on your system.\n" + ex.getMessage());
-		}
-		catch (NoSuchAlgorithmException ex)
-		{
-			throw new GeneralSecurityException("A required Java security component could not be found on your system.\n" + ex.getMessage());
-		}
-		catch (InvalidKeyException ex)
-		{
-			throw new GeneralSecurityException("The Editize component in use in this page is damaged.\n"+ex.getMessage());
-		}
-		catch (ClassFormatError er)
-		{
-			throw new GeneralSecurityException("The license file for Editize in this Web page is invalid.");
-		}
-		catch (SignatureException ex)
-		{
-			throw new GeneralSecurityException("The license file for Editize in this Web page is invalid.");
-		}
-		catch (IOException ex)
-		{
-			System.err.println("IOError while attempting to download license file: " + ex.getMessage());
-			ex.printStackTrace(System.err);
-			throw new GeneralSecurityException("The license file for Editize in this Web page is not found.");
-		}
-	}
-
-	private boolean isLicenseFileValid(InputStream is, String curhost, boolean domainLicenseRequired, PublicKey pk)
-			throws GeneralSecurityException, ClassNotFoundException, IOException, ClassFormatError
-	{
-		ObjectInputStream ois;
-
-		ois = new ObjectInputStream(is);
-		String expirydate = new String((byte[]) ois.readObject());
-		byte[] hostsignature = (byte[]) ois.readObject();
-		byte[] expirysignature = (byte[]) ois.readObject();
-
-		// Prep a Signature object and verify the validity of the license for this host
-		Signature s = Signature.getInstance("MD5withRSA");
-		s.initVerify(pk);
-		s.update(("."+curhost).getBytes()); // Check for domain license
-		if (!s.verify(hostsignature))
-		{
-			if (domainLicenseRequired) return false;
-			s.update(curhost.getBytes()); // Check for non-domain license
-			if (!s.verify(hostsignature)) return false;
-		}
-
-		// Check signature of license date
-		s.update(expirydate.getBytes());
-		if (!s.verify(expirysignature)) return false;
-
-		// Parse license date
-		int day, month, year;
-		try
-		{
-			year = Integer.parseInt(expirydate.substring(0,4));
-			month = Integer.parseInt(expirydate.substring(5,7));
-			day = Integer.parseInt(expirydate.substring(8));
-		}
-		catch (NumberFormatException e)
-		{
-			return false;
-		}
-
-		// Check if the license is expired
-			Calendar cal = Calendar.getInstance();
-		if (cal.get(Calendar.YEAR) > year || cal.get(Calendar.YEAR) == year &&
-			(cal.get(Calendar.MONTH)+1 > month || cal.get(Calendar.MONTH)+1 == month &&
-					cal.get(Calendar.DAY_OF_MONTH) > day))
-			throw new GeneralSecurityException(
-				"The Trial License for Editize has expired. To continue using\n" +
-				"Editize, the Webmaster of this site must purchase a License\n" +
-				"from Editize.com.");
-
-		if (!expirydate.equals("9999-99-99"))
-			System.out.println("Your Editize license is valid until " + expirydate + " (YYYY-MM-DD).");
-
-
-		// If we've made it this far, the license key is A-OK!
-		System.out.println("Editize license file verified.");
-		return true;
-	}
-
-	/**
 	 * Called to start the applet. You never need to call this method
 	 * directly, it is called when the applet's document is visited.
 	 *
@@ -834,19 +605,6 @@ public class EditizeApplet extends JApplet implements Runnable
         {
             isFirstRun = false;
             System.out.println("Starting Editize version: " + VERSION);
-
-            // Verify license validity
-            try
-            {
-                if (!this.isLicensed())
-                    throw new GeneralSecurityException("Editize is not licensed for use on " + getDocumentBase().getHost() + ".");
-            }
-            catch (GeneralSecurityException ex)
-            {
-                JOptionPane.showMessageDialog(aEditor, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                remove(this.aEditor);
-                return;
-            }
 
             if (submitButton != null) {
                 submitButton.init();
