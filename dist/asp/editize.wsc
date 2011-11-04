@@ -12,7 +12,6 @@
 	<property name="width"/>
 	<property name="height"/>
 	<property name="codebase"/>
-	<property name="licensefileext"/>
 	<property name="ns4support"/>
 	<property name="about"/>
 	<property name="showsubmitbutton"/>
@@ -103,10 +102,8 @@ function Editize()
 var name = "editize";
 
 // The codebase path. If set, this is the relative or absolute URL
-// of the directory that contains the Editize Applet JAR files
-// and license file(s).
+// of the directory that contains the Editize Applet JAR files.
 var codebase = ".";
-var licensefileext = "";
 var ns4support = false;
 
 // Hide "About Editize" menu item if false.
@@ -359,7 +356,6 @@ function DisplayContent()
 	var attribs = new Object();
 	attribs["fieldid"]						= name;
 	if (codebase !== "")		attribs["codebase"]		= codebase;
-	if (licensefileext !== "")	attribs["licenseext"]		= licensefileext;
 	if (about !== "")		attribs["about"]		= trueOrFalse(about);
 	if (showsubmitbutton !== "")	attribs["showsubmitbutton"]	= trueOrFalse(showsubmitbutton);
 	if (submitbuttonlabel !== "")	attribs["submitbuttonlabel"]	= submitbuttonlabel;

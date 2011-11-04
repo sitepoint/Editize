@@ -101,17 +101,7 @@
   </table>
   <p class="note">* Files marked with an asterix are sample scripts only, and 
     are not required for <em>Editize </em>to function on your server.</p>
-  <p>See the next section to discover the meaning of the file called <code>PLACE 
-    YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code>.</p>
-  <h2>Step 2: Put your <em>Editize</em> license file on your server</h2>
-  <p>If you are installing <em>Editize </em>on your own machine for local testing (i.e. the site you are working on will be accessible as <code>http://localhost/...</code> or <code>http://127.0.0.1/...</code>), you do not need a license file and can skip this step.</p>
-  <p>In most cases, however, you'll want to deploy <em>Editize</em> on a server that is accessible to other people. To do this, you will require an <em>Editize</em> license file. You can get a free trial license file from the <em><a href="http://www.editize.com/">Editize</a></em><a href="http://www.editize.com/"> Web site</a> (click 'Download' and choose the type of license you need).</p>
-  <p>There are three types of <em>Editize</em> licenses. A <strong>hostname license</strong> lets you use <em>Editize</em> on a Web site with a particular hostname (e.g. mysite.com). If your Web site is accessible with more than one hostname, (e.g. admin.mysite.com and mysite.com), you will need a license file for each hostname. The majority of trial licenses we issue are hostname licenses. </p>
-  <p>A <strong>domain license</strong> lets you use <em>Editize</em> on all Web sites within a particular domain (e.g. mydomain.com). With a domain license, you don't need additional licenses to use <em>Editize</em> on subdomains (e.g. admin.mydomain.com). When you buy <em>Editize</em>, you'll get a domain license for the domain of your choice. </p>
-  <p>A <strong>private network IP license</strong> lets you use <em>Editize</em> on a Web server within a private network. This is useful for Intranets and home networks where servers may not neccessarily have hostnames or even fixed IP addresses. In most cases, <em>Editize</em> customer support will be happy to issue you with a temporary private network IP license for a test server while you are developing a site that will eventually be launched on the Internet with a hostname license.</p>
-  <p>In most cases, <em>Editize</em> <a href="http://editize.com/support.php">Customer Support</a> will be happy to issue you with additional licenses if you need them at no extra charge, so long as they are only used to run <em>Editize</em> on a site for which you have already bought a license. Feel free to contact us if you have any questions about licensing <em>Editize</em> for your needs.</p>
-  <p>If you have a hostname or domain license, the file will be called <code>editize.<em>hostname</em>.lic</code>. If you have a private network IP license, the file will instead be called <code>editize.lic</code>. In either case, copy or upload the file into the same folder that you created in Step 1 above. There is a file called <code>PLACE YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code> to remind you to do this, which you can delete if you like.</p>
-  <h2>Step 3: Try out a sample script</h2>
+  <h2>Step 2: Try out a sample script</h2>
   <p>The <em>Editize</em> folder on your server contains a couple of sample scripts 
     for you to try out. Each of these scripts contains a form with an <em>Editize</em> 
     field in it. When you submit the form, the script should display the HTML 
@@ -136,7 +126,7 @@
   <p>Have a play with the sample form, submit a document, and then re-open it 
     for editing. If you run into any problems, see the <a href="../troubleshooting.html">Troubleshooting</a> 
     section of this manual. Otherwise, you're good to go!</p>
-  <h2>Step 4: Integrate <em>Editize</em> into your own scripts</h2>
+  <h2>Step 3: Integrate <em>Editize</em> into your own scripts</h2>
   <p>You can add the following code to the top of any PHP script to load the <em>Editize 
     </em>API for PHP:</p>
   <pre class="tag">&lt;?php <span class="attributename">require_once</span>('<em>path/to/</em>editize.php'); ?&gt;</pre>
@@ -215,7 +205,7 @@
     the <a href="reference.html">Reference</a> section of this manual, or you 
     can use the <a href="codegen.html">Code Generator</a> to select all the properties 
     you want from a list and have the code generated for you automatically.</p>
-  <h2>Step 5: (Optional) Providing a List of Images</h2>
+  <h2>Step 4: (Optional) Providing a List of Images</h2>
   <p>By default, the Insert Image tool in <em>Editize </em>will prompt the user 
     for the URL of the image he or she wishes to insert. Since it can be fairly 
     tedious to hand-type the URL for every image, <em>Editize </em>also provides 
@@ -232,7 +222,7 @@
     <code>imglist.php</code> that produces a list of all the images in a given 
     directory and its subdirectories is provided in the <code>php</code> folder 
     of this distribution.</p>
-  <h2>Step 6: (Optional) Improving Browser Compatibility</h2>
+  <h2>Step 5: (Optional) Improving Browser Compatibility</h2>
     <p>The following browsers do not support the standard for JavaScript-to-Java communication, upon which <em>Editize</em> relies:</p>
     <ul>
       <li>Internet Explorer 5.2 for Mac OS X</li>

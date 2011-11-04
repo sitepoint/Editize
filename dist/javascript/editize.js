@@ -13,10 +13,8 @@ function Editize()
 	this.name = "editize";
 	
 	// The codebase path. If set, this is the relative or absolute URL
-	// of the directory that contains the Editize Applet JAR files
-	// and license file(s).
+	// of the directory that contains the Editize Applet JAR files.
 	this.codebase = ".";
-	this.licensefileext = "";
 	this.ns4support = "";
 	
 	// The width of the Editize control
@@ -133,7 +131,6 @@ function Editize()
 		var attribs = new Object();
 		attribs["fieldid"]							= this.name;
 		if (this.codebase !== "")		attribs["codebase"]		= this.codebase;
-		if (this.licensefileext !== "")		attribs["licenseext"]		= this.licensefileext;
 		if (this.showsubmitbutton !== "")	attribs["showsubmitbutton"]	= this.trueOrFalse(this.showsubmitbutton);
 		if (this.submitbuttonlabel !== "")	attribs["submitbuttonlabel"]	= this.submitbuttonlabel;
 		if (this.submitbuttonname !== "")	attribs["submitbuttonname"]	= this.submitbuttonname;

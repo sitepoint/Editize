@@ -15,10 +15,8 @@ class Editize
   var $name = "editize";
 
   // The codebase path. If set, this is the relative or absolute URL
-  // of the directory that contains the Editize Applet JAR files
-  // and license file(s).
+  // of the directory that contains the Editize Applet JAR files.
   var $codebase = ".";
-  var $licensefileext;
   var $ns4support = FALSE;
 
   // The width of the Editize control

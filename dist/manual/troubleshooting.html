@@ -22,9 +22,8 @@
     <hr noshade align="right" />
     <a href="troubleshooting.html">Troubleshooting</a><img src="images/marker.gif" width="15" height="9" border="0"> 
     <hr noshade align="right" />
-    <a href="history.html">Revision History</a><img src="images/x.gif" width="15" height="9" border="0"> 
-    <hr noshade align="right" />
-    <a href="license.html">License Agreement</a><img src="images/x.gif" width="15" height="9" border="0"></div>
+    <a href="history.html">Revision History</a><img src="images/x.gif" width="15" height="9" border="0">
+  </div>
 </div>
 
 <div id="center">
@@ -37,19 +36,6 @@
   <p>Feel free to contact <a href="http://editize.com/support.php">Customer Support</a> 
     if you are unable to resolve your problem with the instructions provided here.</p>
   <h2>General Java Applet Errors</h2>
-  <p><strong>The License File for Editize in this Web page is not found.</strong></p>
-  <p>If the <em>Editize </em>applet displays a message box with this error message, 
-    it means the Java Plug-In was not able to download the license file for your 
-    Web site. This file should generally be called <code>editize.<em>hostname</em>.lic</code>, 
-    where <code><em>hostname</em></code> is the hostname of your Web site, and 
-    should be placed in the same publically-accessible (i.e. not password-protected) 
-    directory of your Web site as <code>editize.jar</code>.</p>
-  <p>Assuming you have placed this file where it belongs, it is possible that 
-    your organization's proxy server is interfering with the Java Plug-in's ability 
-    to download the license file. This usually occurs when a Microsoft Proxy Server 
-    (ISA) is in use. Microsoft Proxy Server uses a non-standard user authentication 
-    method called NTLM (a.k.a. challenge-response) that the Java Plug-in did not support until version 1.4.2. Download and install the latest Java Plug-In from <a href="http://www.java.com/">http://www.java.com/</a> to correct this problem.</p>
-  <p>Another possibility is that your Web server is set up not to allow <code>.lic</code> files to be downloaded. The version of IIS included in Windows Server 2003, in particular, is configured this way by default. Try renaming your license file so that it has a different extension (e.g. <code>editize.<em>hostname</em>.jpg</code>) and then use the <code>licensefileext</code> property (see the Reference section for your chosen API) to tell Editize what that new extension is. </p>
   <p><strong>java.lang.ClassFormatError: com/editize/EditizeApplet (bad magic 
     number)</strong></p>
   <p>This error indicates that the Java Plug-In tried to download the <code>editize.jar</code> 
@@ -161,7 +147,7 @@ ed.display(&quot;<strong>&lt;cfoutput&gt;#JSStringFormat(#htmlCode#)#&lt;/cfoutp
   <div id="footer"> 
         <p><a href="index.html">Introduction</a> | <a href="quickstart.html">Quick 
           Start Guide</a> | <a href="features.html">List of Features</a> | <a href="history.html">Revision 
-          History</a> | <a href="license.html">License Agreement</a></p>
+          History</a></p>
   </div>
 </div>
 </body>
