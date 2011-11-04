@@ -1,0 +1,2 @@
+Class-Path: kunststoff.jar
+Main-Class: com/editize/Editize
