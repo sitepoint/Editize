@@ -36,7 +36,7 @@ For Java developers who may peruse this codebase, here are a few things to look 
 
 ## How to Use Editize
 
-The files you would normally get as a user of Editize (as opposed to a developer) can be found in the `dist/` subdirectory of this distribution. I contains the release version of Editize along with all support files and documentation.
+The files you would normally get as a user of Editize (as opposed to a developer) can be found in the `dist/` subdirectory of this distribution, or may be downloaded as a ZIP file from the Downloads tab of this project on GitHub. It contains the open source release of Editize along with all support files and documentation.
 
 The Editize user manual can be found in `dist/manual/index.html`. It provides full instructions for integrating Editize into a web page to provide WYSIWYG editing of HTML content.
 
