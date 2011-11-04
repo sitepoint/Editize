@@ -46,21 +46,21 @@ When released commercially, the Editize applet was signed with a trusted code si
 
 If you wish to sign Editize (or any modified derivative) yourself to regain access to the system clipboard, here’s what you need to do:
 
-  - Purchase a Java Code Signing Certificate for your organization. SitePoint obtained its certificate from [Thawte][thawte], which as of this writing charges US$299 per year for a code signing certificate. You need to renew the certificate when it expires and re-sign the applet to continue using it as a signed applet.
-  - Generate a new key using the keytool provided with the Java SDK:
-    - Type this command at your system prompt: `keytool -genkey -keyalg RSA -alias myeditizekey`
-    - Answer the questions about you and your organization. Your certificate provider can provide guidance for how to answer these, but in general you will want to supply your website domain (e.g. editize.com) as the “first and last name” when prompted.
-  - Generate a Certificate Signing Request (CSR) to send to you certificate provider:
-    - Type this command at your system prompt: `keytool -certreq -alias myeditizekey -file myeditizekey.csr`
-    - Open the resulting `.csr` file in a text editor to copy and paste it into the web form provided by your certificate provider.
-  - Once you certificate provider supplies you with a signed certificate, download it in the default PKCS #7 Certificate Chain format:
-    - You’ll see the certificate as a block of text in the browser. Select it (including the `BEGIN` and `END` lines) and copy and paste it into a text editor.
-    - Save it as a `.crt` file (e.g. `myeditizekey.crt`).
-  - Import the certificate
-    - Type this command at your system prompt: `keytool -import -trustcacerts -alias myeditizekey -file myeditizekey.crt`
-    - Observe the confirmation: “Certificate reply was installed in keystore”
-  - Update `build.xml` to use your key to sign the `editize.jar` file after it is built. Look for the `jarsign.module.editize` target in the `build.xml` file and follow the instructions in the comment there.
-  - Build Editize as normal to get a signed version of `editize.jar`.
+  1. Purchase a Java Code Signing Certificate for your organization. SitePoint obtained its certificate from [Thawte][thawte], which as of this writing charges US$299 per year for a code signing certificate. You need to renew the certificate when it expires and re-sign the applet to continue using it as a signed applet.
+  2. Generate a new key using the keytool provided with the Java SDK:
+    1. Type this command at your system prompt: `keytool -genkey -keyalg RSA -alias myeditizekey`
+    2. Answer the questions about you and your organization. Your certificate provider can provide guidance for how to answer these, but in general you will want to supply your website domain (e.g. editize.com) as the “first and last name” when prompted.
+  3. Generate a Certificate Signing Request (CSR) to send to you certificate provider:
+    1. Type this command at your system prompt: `keytool -certreq -alias myeditizekey -file myeditizekey.csr`
+    2. Open the resulting `.csr` file in a text editor to copy and paste it into the web form provided by your certificate provider.
+  4. Once you certificate provider supplies you with a signed certificate, download it in the default PKCS #7 Certificate Chain format:
+    1. You’ll see the certificate as a block of text in the browser. Select it (including the `BEGIN` and `END` lines) and copy and paste it into a text editor.
+    2. Save it as a `.crt` file (e.g. `myeditizekey.crt`).
+  5. Import the certificate
+    1. Type this command at your system prompt: `keytool -import -trustcacerts -alias myeditizekey -file myeditizekey.crt`
+    2. Observe the confirmation: “Certificate reply was installed in keystore”
+  6. Update `build.xml` to use your key to sign the `editize.jar` file after it is built. Look for the `jarsign.module.editize` target in the `build.xml` file and follow the instructions in the comment there.
+  7. Build Editize as normal to get a signed version of `editize.jar`.
 
 [thawte]: https://www.thawte.com/code-signing/index.html
 
