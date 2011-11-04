@@ -76,7 +76,7 @@ Although the original creator of Editize, [Kevin Yank][kevinyank], cannot commit
 
 ### Outstanding Feature Requests
 
-  * Microsoft Word change-tracking code (<span class="msoIns/msoDel">) should be filtered out of clipboard content when pasting.
+  * Microsoft Word change-tracking code (`<span class="msoIns/msoDel">`) should be filtered out of clipboard content when pasting.
   * ASP.NET Web Forms control should be a strongly-named assembly.
   * Need to document the undocumented “XHTML strict mode” feature and add WYSIWYG support for the element classes it applies.
   * OpenOffice HTML clipboard compatibility.
