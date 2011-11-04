@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Editize Submission JavaScript for Mac OS X</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script language="JavaScript">
+// Parse the search string
+var txt = '';
+var params = location.search;
+if (params.length>1)
+{
+	params = params.substring(1).split('&');
+	for (var i=0;i<params.length;i++)
+	{
+		params[i] = params[i].split('=');
+		params[i][0] = __unescape(params[i][0]);
+		params[i][1] = __unescape(params[i][1]);
+	}
+	if (params[0][0] = 'id')
+	{
+		var id = params[0][1];
+		if (params[1][0] == 'submit')
+		{
+			parent.window.__submitCallback(id);
+		}
+		else if (params[1][0] == 'clear')
+		{
+			parent.window.__getObj(id).value = '';
+		}
+		else if (params[1][0] == 'txt')
+		{
+			var field = parent.window.__getObj(id);
+			field.value = field.value + params[1][1];
+		}
+	}
+}
+function __unescape(str)
+{
+	var strs = str.split('+');
+	str = strs[0];
+	for (var i=1;i<strs.length;i++)
+	{
+		str += ' ' + strs[i];
+	}
+	return unescape(str);
+}
+</script>
+</head>
+<body>
+</body>
+</html>

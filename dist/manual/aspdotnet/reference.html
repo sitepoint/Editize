@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) API for ASP.NET</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+<link href="../styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="top"><img src="../images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <a href="../index.html" class="tab">General</a> <a href="../asp/index.html" class="tab">ASP</a> 
+  <span class="tab this">ASP.NET</span> <a href="../javascript/index.html" class="tab">JavaScript</a> 
+  <a href="../php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Getting Started</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="codegen.html">Code Generator</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="reference.html">API Reference</a><img src="../images/marker.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center"> 
+  <h1>The Editize&#8482; ASP.NET API Reference</h1>
+  <p>This section of the manual documents in detail all the properties and methods 
+    of the <em>Editize</em> API for ASP.NET.</p>
+  <p>To create an <em>Editize</em> field in a Web Form, first ensure that the 
+    <code>EditizeDotNet.dll</code> has been placed in the bin folder in the root 
+    of the current Web Application (note: Visual Studio .NET will do this for 
+    you automatically). Then load the <em>Editize</em> Server Control:</p>
+  <p> <code class="tag">&lt;%@ <span class="tagname">Register</span> <span class="attributename">TagPrefix</span>=&quot;SitePoint&quot; 
+    <span class="attributename">Namespace</span>=&quot;EditizeDotNet&quot; <span class="attributename">Assembly</span>=&quot;EditizeDotNet&quot; 
+    %&gt;</code></p>
+  <p>You can then create an <em>Editize</em> field using the <code>SitePoint:Editize</code> 
+    tag:</p>
+  <p><code class="tag">&lt;<span class="tagname">SitePoint:Editize</span> <span class="attributename">runat</span>=&quot;server&quot; 
+    <span class="attributename">id</span>=&quot;example&quot;&gt;&lt;/<span class="tagname">SitePoint:Editize</span>&gt;</code></p>
+  <p>The following sections list the various attributes and event handlers that 
+    you can assign to the <code>SitePoint:Editize</code> tag.</p>
+  <h2>Basic Properties</h2>
+  <dl>
+    <dt><code>ID</code></dt>
+    <dd> (Required<code></code>) As shown above, the <code>ID</code> attribute 
+      uniquely identifies the <em>Editize</em> field in your page, so that you 
+      can access the content that users edit with it.<br>
+      <br>
+      E.g.: As a tag attribute:<br>
+      <br>
+      <code>&lt;SitePoint:Editize runat=&quot;server&quot; <font color="#FF0000">id</font><font color="#0000FF">=&quot;MyEditize&quot;</font> 
+      /&gt;</code><br>
+      <br>
+      E.g.: As an object property in C#:<br>
+      <br>
+      <span class="tagname"><code>MyEditize</code></span><code class="tag">.<span class="attributename">ID</span> 
+      = &quot;MyEditize&quot;;</code></dd>
+    <dt><code>Width</code></dt>
+    <dd> (Default: <code>&quot;600px&quot;</code>) Specifies the width of the 
+      <em>Editize</em> field. May be specified in pixels or as a percentage of 
+      available width.</dd>
+    <dd> E.g.: As a tag attribute:<br>
+      <br>
+      <code>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot; 
+      <font color="#FF0000">width</font><font color="#0000FF">=&quot;400px&quot;</font> 
+      /&gt;</code><br>
+      <br>
+      E.g.: As an object property in VB.NET:<br>
+      <br>
+      <span class="tagname"><code class="tagname">MyEditize</code><code class="tag"></code></span><code class="tag">.<span class="attributename">Width</span> 
+      = new <span class="attributename">Unit</span>(&quot;600px&quot;)</code></dd>
+    <dt><code> Height</code></dt>
+    <dd>(Default: <code>&quot;600px&quot;</code>) Same as <code>Width</code>, 
+      but specifies the height of the <em>Editize</em> field.<br>
+      <br>
+      E.g.: As a tag attribute:<br>
+      <br>
+      <code>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot; 
+      <font color="#FF0000">height</font><font color="#0000FF">=&quot;400px&quot;</font> 
+      /&gt;</code><br>
+      <br>
+      E.g.: As an object property in C#:<br>
+      <br>
+      <span class="tagname"><code class="tagname">MyEditize</code></span><code class="tag">.<span class="attributename">Height</span> 
+      = new <span class="attributename">Unit</span>(&quot;600px&quot;);</code></dd>
+    <dt> <code><a name="codebase"></a>Codebase</code></dt>
+    <dd>(Default: <code>&quot;.&quot;</code>) A relative or absolute URL. Specifies 
+      the directory where the <em>Editize</em> JAR files and license file(s) may 
+      be found on your site. <em>Editize </em>may not work properly if its files 
+      are stored in a password-protected directory of your Web server (the user 
+      may be prompted, possibly repeatedly, for the username and password to access 
+      the files). By placing them in an unprotected directory and then setting 
+      this property to point to that directory, you can use <em>Editize </em>on 
+      password-protected pages.</dd>
+    <dd> E.g.: As a tag attribute:<br>
+      <br>
+      <code>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot;<font color="#FF0000"> 
+      codebase<font color="#0000FF">=&quot;/editize/&quot;</font> </font>/&gt;</code></dd>
+    <dt><code>Content</code></dt>
+    <dd>(Default: <code>&quot;&quot;</code>) The HTML content in the control. 
+      By setting this value, you can present the user with a document to edit. 
+      By retrieving this value, you can obtain the document that the user created. 
+      When this value has changed following a form submission, the control fires 
+      a <code>ContentChanged</code> event (see <a href="#events">Control Events</a> 
+      below).</dd>
+    <dd> E.g.: As a tag attribute:<br>
+      <br>
+      <code>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot;<font color="#FF0000"> 
+      content<font color="#0000FF">=&quot;&amp;lt;p&amp;gt;Document here&amp;lt;/p&amp;gt;&quot;</font> 
+      </font>/&gt;</code><br>
+      <br>
+      E.g.: As an object property in VB.NET:<br>
+      <br>
+      <code>MyEditize.Content = &quot;&lt;p&gt;Document here&lt;/p&gt;&quot;;</code></dd>
+  </dl>
+  <h2>Feature Set Configuration Properties</h2>
+  <p>The properties in this section are all of type <code>bool</code>, and may 
+    all be set to either <code>true</code> or <code>false</code> to enable or 
+    disable the feature in question.</p>
+  <p> E.g.: Disabling paragraph styles with a tag attribute:<br>
+    <br>
+    <code>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot;<font color="#FF0000"> 
+    paragraphstyles<font color="#0000FF">=&quot;false&quot;</font> </font>/&gt;</code> 
+  </p>
+  <p>E.g.: Disabling inline code by setting an object property in C#:<br>
+    <br>
+    <span class="tagname"><code class="tagname">MyEditize</code></span><code class="tag">.<span class="attributename">InlineCode</span> 
+    = false; // Disables inline code</code></p>
+  <p>Unless otherwise indicated, these properties default to <code>true</code>.</p>
+    
+  <dl>
+    <dt><code>About</code></dt>
+    <dd>If <code>true</code>, the pop-up menu in <em>Editize</em> will contain 
+      a &quot;About Editize&quot; menu item, which opens the <a href="http://www.editize.com/">Editize 
+      Web site</a> in a new browser window when selected. If <code>false</code>, 
+      the menu item does not appear.</dd>
+    <dt><code>EditButtons</code></dt>
+    <dd>If <code>true</code>, the user has access to the standard edit features 
+      (cut, copy, paste, undo, redo) through buttons on the toolbar. If <code>false</code>, 
+      the buttons do not appear, but the features remain available through the 
+      pop-up menu and keyboard shortcuts.</dd>
+    <dt><code><a name="codeview"></a>CodeView</code></dt>
+    <dd>This property defaults to <code>false</code>. If <code>true</code>, the 
+      user has access to a 'Code View' tab that displays the underlying HTML code 
+      of the document for direct editing.</dd>
+    <dt><code>FormElementsAllowed</code></dt>
+    <dd>This property defaults to <code>false</code>. If <code>true</code>, the
+      user may insert form elements (including form, input, select and textarea
+      tags) by pasting HTML content from the clipboard, or by typing them into
+      the 'Code View' tab. Otherwise, these tags are stripped out when reading
+      in HTML content.</dd>
+    <dt><code>ParagraphStyles</code></dt>
+    <dd>If <code>true</code>, the user can select paragraph styles from a drop-down 
+      menu in the toolbar.</dd>
+    <dt><code>HeadingStyle</code></dt>
+    <dd>If <code>true</code>, the Heading style is available in the paragraph 
+      style dropdown.</dd>
+    <dt><code>SubheadingStyle</code></dt>
+    <dd>If <code>true</code>, the Subheading style is available in the paragraph 
+      style dropdown.</dd>
+    <dt><code>InsetStyle</code></dt>
+    <dd>If <code>true</code>, the Indent and Outdent buttons will be available 
+      in the toolbar.</dd>
+    <dt><code>MonospacedStyle</code></dt>
+    <dd>If <code>true</code>, the Monospaced style is available in the paragraph 
+      style dropdown.</dd>
+    <dt><code>ParagraphAlignments</code></dt>
+    <dd>If <code>true</code>, the user can choose to make paragraphs (except for 
+      Monospaced paragraphs) Left, Center, or Right aligned. If <code>false</code>, 
+      all paragraphs are Left aligned.</dd>
+    <dt><code>BulletLists</code></dt>
+    <dd>If <code>true</code>, the user can create bullet lists with a button on 
+      the toolbar.</dd>
+    <dt><code>NumberedLists</code></dt>
+    <dd>If <code>true</code>, the user can create numbered lists with a button 
+      on the toolbar.</dd>
+    <dt><code>BoldText</code></dt>
+    <dd>If <code>true</code>, the user can create bold text with a button on the 
+      toolbar, or with a keyboard shortcut (Ctrl-B).</dd>
+    <dt><code>ItalicText</code></dt>
+    <dd>If <code>true</code>, the user can create italic text with a button on 
+      the toolbar.</dd>
+    <dt><code>UnderlineText</code></dt>
+    <dd>If <code>true</code>, the user can create underlined text with a button 
+      on the toolbar, or with a keyboard shortcut (Ctrl-U).</dd>
+    <dt><code>HighlightText</code></dt>
+    <dd>If <code>true</code>, the user can create highlighted text (<code>&lt;span 
+      class=&quot;highlighted&quot;&gt;</code>) with a button on the toolbar.</dd>
+    <dt><code>InlineCode</code></dt>
+    <dd>If <code>true</code>, the user can create inline code (<code>&lt;code&gt;</code>) 
+      with a button on the toolbar, or with a keyboard shortcut (Alt-C).</dd>
+    <dt><code>Hyperlinks</code></dt>
+    <dd>If <code>true</code>, the user can create and remove hyperlinks with a 
+      button on the toolbar. The user may choose whether a link loads in the default 
+      window, or in a new window (<code>&lt;a href=&quot;...&quot; target=&quot;_blank&quot;&gt;</code>).</dd>
+    <dt><code>Images</code></dt>
+    <dd>If <code>true</code>, the user can create and edit images with a button 
+      on the toolbar. The user may provide an absolute or relative URL to the 
+      image file to be inserted. Relative URLs are resolved based on the <a href="#baseurl">BaseURL</a> 
+      property, described below.</dd>
+    <dt><code>Tables</code></dt>
+    <dd>If <code>true</code>, the user can create tables with a button on the 
+      toolbar.</dd>
+  </dl>
+  <h2>Display Properties</h2>
+<p>These properties let you configure <em>Editize </em>to display a document with 
+  the same character styles that you use on your site. In this way, the WYSIWYG 
+  editing interface presented by <em>Editize </em>can be made to exactly match 
+  the look the content will have when displayed as part of your site.</p>
+    
+  <dl>
+    <dt><code><a name="appletbgcolor" id="appletbgcolor"></a>AppletBgColor</code></dt>
+    <dd>(Default: default system background color) Specifies the background color 
+      that should be displayed around the <em>Editize</em> applet. When the <a href="#codeview"><code>CodeView</code></a> 
+      feature is enabled, this property controls the color of the area surrounding 
+      the WYSIWYG and Code View tabs. When the <a href="#showsubmitbutton"><code>ShowSubmitButton</code></a> 
+      feature is enabled, this property controls the color of the area surrounding 
+      the Java submit button. This does not affect the background color of the 
+      document displayed in the applet (see <a href="#bgcolor"><code>BGColor</code></a> 
+      below for that); only of the applet itself. The value is specified as an 
+      HTML color code (<code>&quot;#RRGGBB&quot;</code>), or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML 
+      standard color name</a>.</dd>
+    <dt><code><a name="baseurl" id="baseurl"></a>BaseURL</code></dt>
+    <dd>(Default: none) Specifies the base URL for images and hyperlinks in the 
+      document. Typically, you should set this to the same base URL that the finished 
+      document will be displayed with on your Web site. For example, if the finished 
+      document will be displayed by <code>http://www.mysite.com/site/content.asp</code>, 
+      you should set the base URL to <code>http://www.mysite.com/site/</code>. 
+      By so doing, you can tell Editize to insert an image with the URL <code>graphics/mylogo.gif</code> 
+      and it will find the image file at <code>http://www.mysite.com/site/graphics/mylogo.gif</code>.</dd>
+    <dt><code><a name="bgcolor" id="appletbgcolor"></a>BGColor</code></dt>
+    <dd>(Default: <code>white</code>) Specifies the background color that should 
+      be displayed within the text entry area of the <em>Editize</em> applet. 
+      The value is specified as an HTML color code (<code>&quot;#RRGGBB&quot;</code>), 
+      or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML standard 
+      color name</a>.</dd>
+    <dt><code><a name="basefontface"></a>BaseFontFace</code></dt>
+    <dd>(Default: <code>&quot;Times New Roman&quot;</code>) Specifies the font 
+      face for Normal text in the <em>Editize </em>form field. All other character 
+      and paragraph styles except Monospaced and Inline Code will inherit this 
+      font face by default as well. You may specify a single font family (e.g. 
+      <code>&quot;Verdana&quot;</code>), or one of the following logical font 
+      names: <code>&quot;Dialog&quot;</code>, <code>&quot;DialogInput&quot;</code>, 
+      <code>&quot;Monospaced&quot;</code>, <code>&quot;Serif&quot;</code>, <code>&quot;SansSerif&quot;</code>, 
+      or <code>&quot;Symbol&quot;</code>.</dd>
+    <dt><code> <a name="basefontsize"></a>BaseFontSize</code></dt>
+    <dd>(Default: <code>16</code>) Specifies the font size for Normal text in 
+      the <em>Editize </em>form field. All other character and paragraph styles 
+      except Heading and Subheading will inherit this font size by default as 
+      well. The value is specified as an integer (<code>int</code>) in pixels.</dd>
+    <dt><code> <a name="basefontcolor"></a>BaseFontColor</code></dt>
+    <dd>(Default: <code>&quot;#000000&quot;</code>) Specifies the font color for 
+      Normal text in the <em>Editize </em>form field. All other character and 
+      paragraph styles except hyperlinks will inherit this font color by default 
+      as well. The value is specified as an HTML color code (<code>&quot;#RRGGBB&quot;</code>), 
+      or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML standard 
+      color name</a>.</dd>
+    <dt><code> HeadFontFace</code></dt>
+    <dd>(Default: inherited) Specifies the font face for Heading style text in 
+      the <em>Editize</em> form field. See <code><a href="#basefontface">BaseFontFace</a></code> 
+      for details.</dd>
+    <dt><code> HeadFontSize</code></dt>
+    <dd>(Default: 32) Specifies the font size for Heading style text in the <em>Editize</em> 
+      form field. See <a href="#basefontface"><code>BaseFontSize</code></a> for 
+      details.</dd>
+    <dt> <code>HeadFontColor</code></dt>
+    <dd>(Default: inherited) Specifies the font color for Heading style text in 
+      the <em>Editize </em>form field. See <a href="#basefontcolor"><code>BaseFontColor</code></a> 
+      for details.</dd>
+    <dt><code> SubheadFontFace</code></dt>
+    <dd>(Default: inherited) Specifies the font face for Subheading style text 
+      in the <em>Editize </em>form field. See <a href="#basefontface"><code>BaseFontFace</code></a> 
+      for details.</dd>
+    <dt> <code>SubheadFontSize</code></dt>
+    <dd>(Default: 24) Specifies the font size for Subheading style text in the 
+      <em>Editize</em> form field. See <a href="#basefontsize"><code>BaseFontSize</code></a> 
+      for details.</dd>
+    <dt> <code>SubheadFontColor</code></dt>
+    <dd>(Default: inherited) Specifies the font color for Subheading style text 
+      in the <em>Editize </em>form field. See <a href="#basefontcolor"><code>BaseFontColor</code></a> 
+      for details.</dd>
+    <dt> <code>InsetFontFace</code></dt>
+    <dd>(Default: inherited) Specifies the font face for indented blocks in the 
+      <em>Editize </em>form field. See <a href="#basefontface"><code>BaseFontFace</code></a> 
+      for details.</dd>
+    <dt> <code>InsetFontSize</code></dt>
+    <dd>(Default: inherited) Specifies the font size for indented blocks in the 
+      <em>Editize </em>form field. See <a href="#basefontsize"><code>BaseFontSize</code></a> 
+      for details.</dd>
+    <dt><code> InsetFontColor</code></dt>
+    <dd> (Default: inherited) Specifies the font color for indented blocks in 
+      the <em>Editize </em>form field. See <a href="#basefontcolor"><code>BaseFontColor</code></a> 
+      for details.</dd>
+    <dt> <code>MonospacedBackgroundColor</code></dt>
+    <dd>(Default: none) Specifies the background color for Monospaced paragraphs. 
+      Generally used to shade code blocks to set them apart from the rest of the 
+      text. The value is specified as an HTML color code (<code>&quot;#RRGGBB&quot;</code>), 
+      or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML standard 
+      color name</a>.</dd>
+    <dt><code>HighlightColor</code></dt>
+    <dd>(Default: <code>&quot;#FF0000&quot;</code>) For the highlighted text feature 
+      to work, you must specify a font color for highlighted text with this property. 
+      The value is specified as an HTML color code (<code>&quot;#RRGGBB&quot;</code>), 
+      or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML standard 
+      color name</a>.</dd>
+    <dt><code>LinkColor</code></dt>
+    <dd>(Default: <code>&quot;#0000FF&quot;</code>) Specifies the text color for 
+      hyperlinked text in the <em>Editize </em>form field. The value is specified 
+      as an HTML color code (<code>&quot;#RRGGBB&quot;</code>), or as an <a href="http://www.w3.org/TR/html401/types.html#h-6.5">HTML 
+      standard color name</a>.</dd>
+    <dt><code>LinkUrls</code></dt>
+    <dd>(Default: &quot;&quot;) Lets you provide a list of suggested link URLs, 
+      which will appear in the hyperlink dialog box in a drop-down list. Users 
+      can then select URLs from that list and then edit them if they wish, or 
+      type their own URLs from scratch as well. This value should be specified 
+      as <code>string</code> that contains a comma-separated list of URLs.<br>
+      <br>
+      E.g. As a tag attribute:<br>
+      <pre>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot;
+  <font color="#FF0000">linkurls</font><font color="#0000FF">=&quot;mailto:,http://www.sitepoint.com/article.php&quot;</font> /&gt;</pre>
+      E.g. As an object property in C#:<br>
+      <br>
+      <code class="tag">// Provide two suggested link URLs for users<br>
+      <span class="tagname">MyEditize</span>.<span class="attributename">LinkUrls</span>=&quot;mailto:,http://www.sitepoint.com/article.php&quot;;</code></dd>
+  </dl>
+  <h2>Special Purpose Properties</h2>
+  <p><code><a name="imglisturl"></a>ImgListUrl</code></p>
+  <dl>
+    <dd> If this property is set to a URL, <em>Editize </em>will download a list 
+      of images from this address and present it to the user in the Insert Image 
+      dialog. The given URL may refer to a server-side script (e.g. to provide 
+      an up-to-date list of images stored in a content management system), but 
+      the output must be plain text of the following format: 
+      <pre>url1 Description of the first image
+url2 Description of the second image
+url3 Description of the third image
+...</pre>
+      Each line should contain a URL optionally followed by a description of the 
+      image. The description (if specified) will both appear in the image list 
+      and be used as the default value for the <code>alt</code> attribute if the 
+      image is selected. If no description is provided, the URL of the image will 
+      appear in the list instead.</dd>
+    <dt><code><a name="licensefileext"></a>LicenseFileExt</code></dt>
+    <dd>(Default: <code>&quot;lic&quot;</code>)<br>
+      <br>
+      Allows you to specify the file extension that <em>Editize</em> uses when 
+      looking for its license file on your server. We have had reports that pre-release 
+      versions of Windows 2003 Server will prevent files with a <code>.lic</code> 
+      extension from being downloaded. If you encounter this issue, you can simply 
+      rename your <em>Editize</em> license file to, say <code>editize.myhost.com.key</code> 
+      and set this property to <code>&quot;key&quot;</code> so that <em>Editize</em> 
+      can find it.</dd>
+  </dl>
+  <h2><a name="events"></a>Control Events</h2>
+  <p>The <em>Editize </em>ASP.NET Server Control supports a single event (of type 
+    <code>EventHandler</code>), which is triggered each time the content in the 
+    control has been changed following a form submission.</p>
+  <dl>
+    <dt><code>ContentChanged</code></dt>
+    <dd>Each time an ASP.NET page is submitted to the server, the <em>Editize 
+      </em>Server Control checks if its contents have changed and updates its 
+      <code>Content </code>property appropriately. Whenever this occurs, a <code>ContentChanged</code> 
+      event is raised by the Control. You can set your own method to handle this 
+      event to react to changes the user makes to the content. Detailed examples 
+      of this are provided in the sample ASP.NET pages provided with this distribution 
+      (in the <code>/aspdotnet/samples</code> directory).<br>
+      <br>
+      Example: As a tag attribute:<br>
+      <pre>&lt;SitePoint:Editize runat=&quot;server&quot; id=&quot;MyEditize&quot;<font color="#FF0000">
+  onContentChanged</font><font color="#0000FF">=&quot;MyEditize_ContentChanged&quot;</font> /&gt;<br>&lt;script language=&quot;C#&quot; runat=&quot;server&quot;&gt;<br>  public void MyEditize_ContentChanged(object sender, EventArgs e)<br>  {
+    // React to the event...
+  }<br>&lt;/script&gt;</pre>
+      Example: As code in C#:<br>
+      <pre>&lt;script language=&quot;C#&quot; runat=&quot;server&quot;&gt;<br>  private void Page_Load(object sender, EventArgs.e)
+  {
+    <span class="tagname">MyEditize</span><span class="tag">.</span><span class="attributename">ContentChanged</span><span class="tag"> += new </span><span class="attributename">EventHandler</span><span class="tag">(MyEditize_ContentChanged);</span><br>  }
+
+  public void MyEditize_ContentChanged(object sender, EventArgs e)
+  {
+    // React to the event...
+  }
+&lt;/script&gt;</pre>
+    </dd>
+  </dl>
+  <div id="footer">
+    <p><a href="index.html">Getting Started</a> | <a href="codegen.html">Code 
+      Generator </a> | <a href="reference.html">API Reference</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,763 @@
+<?xml version="1.0"?>
+<component>
+<registration
+	description="Editize"
+	progid="Editize.aspapi"
+	version="2.00"
+	classid="{5641d906-e65e-48e5-aa46-7da5f1541ea3}"
+>
+</registration>
+<public>
+	<property name="name"/>
+	<property name="width"/>
+	<property name="height"/>
+	<property name="codebase"/>
+	<property name="licensefileext"/>
+	<property name="ns4support"/>
+	<property name="about"/>
+	<property name="showsubmitbutton"/>
+	<property name="submitbuttonlabel"/>
+	<property name="submitbuttonname"/>
+	<property name="bgcolor"/>
+	<property name="paragraphstyles"/>
+	<property name="headingstyle"/>
+	<property name="subheadingstyle"/>
+	<property name="insetstyle"/>
+	<property name="monospacedstyle"/>
+	<property name="paragraphalignments"/>
+	<property name="bulletlists"/>
+	<property name="numberedlists"/>
+	<property name="boldtext"/>
+	<property name="italictext"/>
+	<property name="underlinetext"/>
+	<property name="highlighttext"/>
+	<property name="highlightblock"/>
+	<property name="inlinecode"/>
+	<property name="hyperlinks"/>
+	<property name="images"/>
+	<property name="tables"/>
+	<property name="appletbgcolor"/>
+	<property name="codeview"/>
+	<property name="htmlclipboard"/>
+	<property name="xhtmlstrict"/>
+	<property name="formelementsallowed"/>
+	<property name="editbuttons"/>
+	<property name="baseurl"/>
+	<property name="imglisturl"/>
+	<property name="basefontface"/>
+	<property name="basefontsize"/>
+	<property name="basefontcolor"/>
+	<property name="headfontface"/>
+	<property name="headfontsize"/>
+	<property name="headfontcolor"/>
+	<property name="subheadfontface"/>
+	<property name="subheadfontsize"/>
+	<property name="subheadfontcolor"/>
+	<property name="insetfontface"/>
+	<property name="insetfontsize"/>
+	<property name="insetfontcolor"/>
+	<property name="monospacedbackgroundcolor"/>
+	<property name="highlightcolor"/>
+	<property name="blockhighlightcolor"/>
+	<property name="linkcolor"/>
+	<property name="linkurls"/>
+	<property name="tableclasses"/>
+	<method name="Display"/>
+	<method name="DisplayContent">
+		<parameter name="content"/>
+	</method>
+	<method name="EndForm"/>
+	<method name="DisplaySubmit">
+		<parameter name="text"/>
+		<parameter name="width"/>
+		<parameter name="height"/>
+		<parameter name="name"/>
+	</method>
+</public>
+<implements type="ASP"/>
+<script language="JScript">
+<![CDATA[
+
+var description = new Editize;
+
+/**
+ * A JavaScript API that allows developers to easily insert
+ * the Editize form control into their HTML forms. See the
+ * product documentation for details on the use of this
+ * API, as comments in this file focus on implementation
+ * of that API only.
+ */
+function Editize()
+{	
+	// Register object methods
+	this.Display = Display;
+	this.DisplayContent = DisplayContent;
+	this.DisplaySubmit = DisplaySubmit;	
+
+	return;
+}
+
+// The name of the form element for the Editize control.
+// Normally the user will assign a name, but we assign a default
+// here just in case.
+var name = "editize";
+
+// The codebase path. If set, this is the relative or absolute URL
+// of the directory that contains the Editize Applet JAR files
+// and license file(s).
+var codebase = ".";
+var licensefileext = "";
+var ns4support = false;
+
+// Hide "About Editize" menu item if false.
+var about = "";
+
+// Show submit button as part of applet if true.
+var showsubmitbutton = "";
+var submitbuttonlabel = "";
+var submitbuttonname = "";
+
+// The width of the Editize control
+var width = 600;
+
+// The height of the Editize control.
+var height = 600;
+
+var bgcolor = "";
+
+// Base font properties
+var basefontface = "";
+var basefontsize = "";
+var basefontcolor = "";
+
+// Heading properties
+var headfontface = "";
+var headfontsize = "";
+var headfontcolor = "";
+
+// Subheading properties
+var subheadfontface = "";
+var subheadfontsize = "";
+var subheadfontcolor = "";
+
+// Block Quote properties
+var insetfontface = "";
+var insetfontsize = "";
+var insetfontcolor = "";
+
+// Code block properties
+var monospacedbackgroundcolor = "";
+
+// Highlighting properties
+var highlightcolor = "";
+var blockhighlightcolor = "";
+
+// Link properties
+var linkcolor = "";
+
+// Enable/disable formatting features
+var paragraphstyles = "";
+var headingstyle = "";
+var subheadingstyle = "";
+var insetstyle = "";
+var monospacedstyle = "";
+var paragraphalignments = "";
+var bulletlists = "";
+var numberedlists = "";
+var boldtext = "";
+var italictext = "";
+var underlinetext = "";
+var highlighttext = "";
+var highlightblock = "";
+var inlinecode = "";
+var hyperlinks = "";
+var tables = "";
+var codeview = "";
+var appletbgcolor = "";
+var htmlclipboard = "";
+var xhtmlstrict = "";
+var formelementsallowed = "";
+var editbuttons = "";
+var linkurls = new Array();
+var tableclasses = new Array();
+
+// Image properties
+var images = "";
+var baseurl = "";
+var imglisturl = "";
+
+var submitbuttonnames = new Array();
+
+function Display()
+{
+	return DisplayContent("");
+}
+
+/**
+ * Displays the Editize control using code suitable for whatever
+ * browser is detected. Should be called inside a form.
+ */
+function DisplayContent()
+{
+	var browser = browserDetect();
+	
+	var output = "";
+
+	// Output supporting JavaScript code to be shared betweeen multiple instances
+	// NOTE: Since there's no obvious way to output this code for the first Editize
+	// field in the page only, it has been written in such a way that multiple declarations
+	// are not a problem.
+	output += "<!-- Editize support functions -->\n";
+	output += "<script language=\"JavaScript\" type=\"text/javascript\">\n";
+	output += "var __edSupportDefined;\n";
+	output += "if (__edSupportDefined == null) {\n";
+	output += "\t__edSupportDefined=true;\n";
+	output += "\t__editizeArray = new Array();\n";
+	output += "\t__editizeSubmitButton = null;\n";
+	output += "\t__editizeSubmitOK = false;\n";
+	output += "\t__getObj = function(id)\n";
+	output += "\t{\n";
+	output += "\t\tif (document.getElementById) { // DOM-compliant browsers (MSIE5+, NSN6+, O5+)\n";
+	output += "\t\t\treturn document.getElementById(id);\n";
+	output += "\t\t} else if (document.all) { // MSIE4\n";
+	output += "\t\t\treturn document.all[id];\n";
+	output += "\t\t} else { // NSN4\n";
+	output += "\t\t\tfor (var i=0;i<document.forms.length;i++)\n";
+	output += "\t\t\t{\n";
+	output += "\t\t\t\tif (document.forms[i].elements[id])\n";
+	output += "\t\t\t\t\treturn document.forms[i].elements[id];\n";
+	output += "\t\t\t}\n";
+	output += "\t\t\treturn eval(\"document.\"+id); // If all else fails...\n";
+	output += "\t\t}\n";
+	output += "\t}\n";
+	output += "\t__submitButtonEditize = function(event)\n";
+	output += "\t{\n";
+	output += "\t\t// Record the last submit button clicked\n";
+	output += "\t\t__editizeSubmitButton = this;\n";
+	output += "\t\treturn this.editizeOnclick != null ? this.editizeOnclick(event) : true;\n";
+	output += "\t}\n";
+	output += "\t__submitEditize = function()\n";
+	output += "\t{\n";
+
+	// Tell each Editize field to submit if in a browser that supports
+	// JavaScript to Java communication, then submit the form if
+	// the original onsubmit event handler gives its blessing
+	if (browser == 'iewin' || browser == 'ns6') {
+		output += "\t\tfor (var i = 0; i < __editizeArray.length; i++)\n";
+		output += "\t\t{\n";
+		output += "\t\t\tdocument.applets[__editizeArray[i][0]].writeToField();\n";
+		output += "\t\t\t// Run any custom onsubmit handler that was found for the form\n";
+		output += "\t\t\tif (__editizeArray[i][1] != null)\n";
+		output += "\t\t\t{\n";
+		output += "\t\t\t\tvar retval = __editizeArray[i][1]();\n";
+		output += "\t\t\t\tif (retval === false) return false;\n";
+		output += "\t\t\t}\n";
+		output += "\t\t}\n";
+		output += "\t\t__editizeSubmitButton = null;\n";
+		output += "\t\treturn true;\n";
+		output += "\t}\n";
+	}
+
+	// Load the applet that triggers submission in browsers that don't support
+	// JavaScript-to-Java communication, then block submission, which will be
+	// triggered by the __submitCallback(id) callback function.
+	// Also include __ns4submit function, used to bypass Netscape 4 crash on submit.
+	else if (browser == 'nswin' || browser == 'nsunix' || browser == 'nsmac')
+	{
+		output += "\t\tif (__editizeSubmitOK)\n";
+		output += "\t\t{\n";
+		output += "\t\t\t__editizeSubmitOK = false;\n";
+		output += "\t\t\treturn true;\n";
+		output += "\t\t}\n";
+		output += "\t\tvar submitDiv = document.layers[\"editize_submit_div\"];\n";
+		output += "\t\tvar appletHtml = \"\";\n";
+		output += "\t\tappletHtml += \"<embed type=\\\"application/x-java-applet;version=1.3\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  pluginspage=\\\"http://java.sun.com/j2se/1.3/\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  codebase=\\\"" + codebase + "\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  archive=\\\"editize.jar\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  code=\\\"com.editize.EditizeSubmitter\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  width=\\\"1\\\" height=\\\"1\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  mayscript=\\\"true\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  pluginspage=\\\"http://java.sun.com/j2se/1.3/\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  fieldid=\\\"" + name + "\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  immediate=\\\"true\\\"></embed>\";\n";
+		output += "\t\tsubmitDiv.document.open();\n";
+		output += "\t\tsubmitDiv.document.write(appletHtml);\n";
+		output += "\t\tsubmitDiv.document.close();\n";
+		output += "\t\treturn false; // Wait for callback before submitting\n";
+		output += "\t}\n";
+		output += "\t__ns4submit = function(field, value)\n";
+		output += "\t{\n";
+		output += "\t\t__getObj(field).value += value;\n";
+		output += "\t}\n";
+	}
+
+	// Same goes for IE Mac, and other unidentified browsers.
+	else
+	{
+		output += "\t\tif (__editizeSubmitOK)\n";
+		output += "\t\t{\n";
+		output += "\t\t\t__editizeSubmitOK = false;\n";
+		output += "\t\t\treturn true;\n";
+		output += "\t\t}\n";
+		output += "\t\tvar submitDiv = document.getElementById(\"editize_submit_div\");\n";
+		output += "\t\tvar appletHtml = \"\";\n";
+		output += "\t\tappletHtml += \"<applet code=\\\"com.editize.EditizeSubmitter\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  codebase=\\\"" + codebase + "\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  archive=\\\"editize.jar\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  width=\\\"1\\\" height=\\\"1\\\"\\n\";\n";
+		output += "\t\tappletHtml += \"  mayscript=\\\"true\\\">\\n\";\n";
+		output += "\t\tappletHtml += \"    <param name=\\\"fieldid\\\" value=\\\"" + name + "\\\" />\\n\";\n";
+		output += "\t\tappletHtml += \"    <param name=\\\"immediate\\\" value=\\\"true\\\" />\\n\";\n";
+		output += "\t\tappletHtml += \"    <param name=\\\"osx\\\" value=\\\"" + (browser == 'ie5mac' ? 'true' : 'false') + "\\\" />\\n\";\n";
+		output += "\t\tappletHtml += \"</applet>\\n\";\n";
+		output += "\t\tsubmitDiv.innerHTML = appletHtml;\n";
+		output += "\t\treturn false; // Wait for callback before submitting\n";
+		output += "\t}\n";
+	}
+
+	output += "\t__submitCallback = function(id)\n";
+	output += "\t{\n";
+	output += "\t\t// Submit the form if the original onsubmit event handler gives its blessing\n";
+	output += "\t\tfor (var i = 0; i < __editizeArray.length; i++)\n";
+	output += "\t\t{\n";
+	output += "\t\t\tif (__editizeArray[i][1] != null)\n";
+	output += "\t\t\t{\n";
+	output += "\t\t\t\tvar retval = __editizeArray[i][1]();\n";
+	output += "\t\t\t\tif (retval === false) return false;\n";
+	output += "\t\t\t}\n";
+	output += "\t\t}\n";
+	output += "\t\tif (__editizeSubmitButton != null)\n";
+	output += "\t\t{\n";
+	output += "\t\t\t__editizeSubmitOK = true;\n";
+	output += "\t\t\t__editizeSubmitButton.click();\n";
+	output += "\t\t\t__editizeSubmitButton = null;\n";
+	output += "\t\t}\n";
+	output += "\t\telse\n";
+	output += "\t\t{\n";
+	output += "\t\t\t__getObj(id).form.submit();\n";
+	output += "\t\t}\n";
+	output += "\t}\n";
+
+	// Write out the <div> that will house the submission applet now
+	// if NS4 support is not required. This would cause NS4 to end the form
+	// prematurely, so we will output a standard <textarea> instead of
+	// an Editize field in that browser.
+	if (!ns4support && browser != 'nswin' && browser != 'nsunix' && browser != 'nsmac' && browser != 'iewin' && browser != 'ns6' && browser != 'ns6mac' && browser != 'safari') {
+		output += "\tdocument.writeln(\"<div id=\\\"editize_submit_div\\\" style=\\\"position: absolute;\\\"></div>\");\n";
+	}
+	
+	output += "}\n";
+	output += "</script>\n";
+	
+	var content = "";
+	if (arguments[0] != undefined) content = arguments[0];
+	var contentForHTML = htmlspecialchars(content);
+	var contentForJava = javaspecialchars(content);
+	
+	// Build associative array of attributes
+	var attribs = new Object();
+	attribs["fieldid"]						= name;
+	if (codebase !== "")		attribs["codebase"]		= codebase;
+	if (licensefileext !== "")	attribs["licenseext"]		= licensefileext;
+	if (about !== "")		attribs["about"]		= trueOrFalse(about);
+	if (showsubmitbutton !== "")	attribs["showsubmitbutton"]	= trueOrFalse(showsubmitbutton);
+	if (submitbuttonlabel !== "")	attribs["submitbuttonlabel"]	= submitbuttonlabel;
+	if (submitbuttonname !== "")	attribs["submitbuttonname"]	= submitbuttonname;
+	if (bgcolor !== "")		attribs["bgcolor"]		= bgcolor;
+	if (basefontface !== "")	attribs["basefontface"]		= basefontface;
+	if (basefontsize !== "")	attribs["basefontsize"]		= basefontsize;
+	if (basefontcolor !== "")	attribs["basefontcolor"]	= basefontcolor;
+	if (headfontface !== "")	attribs["headingfontface"]	= headfontface;
+	if (headfontsize !== "")	attribs["headingfontsize"]	= headfontsize;
+	if (headfontcolor !== "")	attribs["headingfontcolor"]	= headfontcolor;
+	if (subheadfontface !== "")	attribs["subheadingfontface"]	= subheadfontface;
+	if (subheadfontsize !== "")	attribs["subheadingfontsize"]	= subheadfontsize;
+	if (subheadfontcolor !== "")	attribs["subheadingfontcolor"]	= subheadfontcolor;
+	if (insetfontface !== "")	attribs["blockquotefontface"]	= insetfontface;
+	if (insetfontsize !== "")	attribs["blockquotefontsize"]	= insetfontsize;
+	if (insetfontcolor !== "")	attribs["blockquotefontcolor"]	= insetfontcolor;
+	if (monospacedbackgroundcolor!=="")	attribs["codebackgroundcolor"]	= monospacedbackgroundcolor;
+	if (highlightcolor !== "")	attribs["highlightcolor"]	= highlightcolor;
+	if (blockhighlightcolor !== "")	attribs["blockhighlightcolor"]	= blockhighlightcolor;
+	if (linkcolor !== "")		attribs["linkcolor"]		= linkcolor;
+	if (baseurl !== "")		attribs["docbaseurl"]		= baseurl;
+	if (imglisturl !== "")		attribs["imglisturl"]		= imglisturl;
+	if (paragraphstyles !== "")	attribs["paragraphstyles"]	= trueOrFalse(paragraphstyles);
+	if (headingstyle !== "")	attribs["headingstyle"]		= trueOrFalse(headingstyle);
+	if (subheadingstyle !== "")	attribs["subheadingstyle"]	= trueOrFalse(subheadingstyle);
+	if (insetstyle !== "")		attribs["blockquotestyle"]	= trueOrFalse(insetstyle);
+	if (monospacedstyle !== "")	attribs["codeblockstyle"]	= trueOrFalse(monospacedstyle);
+	if (paragraphalignments !== "")	attribs["paragraphalignments"]	= trueOrFalse(paragraphalignments);
+	if (bulletlists !== "")		attribs["bulletlists"]		= trueOrFalse(bulletlists);
+	if (numberedlists !== "")	attribs["numberedlists"]	= trueOrFalse(numberedlists);
+	if (boldtext !== "")		attribs["boldtext"]		= trueOrFalse(boldtext);
+	if (italictext !== "")		attribs["italictext"]		= trueOrFalse(italictext);
+	if (underlinetext !== "")	attribs["underlinetext"]	= trueOrFalse(underlinetext);
+	if (highlighttext !== "")	attribs["highlighttext"]	= trueOrFalse(highlighttext);
+	if (highlightblock !== "")	attribs["highlightblock"]	= trueOrFalse(highlightblock);
+	if (inlinecode !== "")		attribs["inlinecode"]		= trueOrFalse(inlinecode);
+	if (hyperlinks !== "")		attribs["hyperlinks"]		= trueOrFalse(hyperlinks);
+	if (images !== "")		attribs["images"]		= trueOrFalse(images);
+	if (editbuttons !== "")		attribs["editbuttons"]		= trueOrFalse(editbuttons);
+	if (tables !== "")		attribs["tables"]		= trueOrFalse(tables);
+	if (codeview !== "")	attribs["codeview"]		= trueOrFalse(codeview);
+	if (appletbgcolor !== "")	attribs["appletbgcolor"]		= appletbgcolor;
+	if (htmlclipboard !== "")	attribs["htmlclipboardimport"]		= trueOrFalse(htmlclipboard);
+	if (xhtmlstrict !== "") attribs["xhtmlstrict"] = trueOrFalse(xhtmlstrict);
+	if (formelementsallowed !== "") attribs["formelementsallowed"] = trueOrFalse(formelementsallowed);
+  
+	// Perform conversion from VBScript array
+	if (typeof(linkurls) == "unknown") {
+		linkurls = new VBArray(linkurls);
+		linkurls = linkurls.toArray();
+	}
+	if (linkurls.length > 0)
+	{
+		// JScript array
+		attribs["linkurls"] = linkurls.length;
+		for (var i=1; i<=linkurls.length; i++)
+		{
+			attribs["linkurls."+i] = linkurls[i-1];
+		}
+	}
+	
+	// Perform conversion from VBScript array
+	if (typeof(tableclasses) == "unknown") {
+		tableclasses = new VBArray(tableclasses);
+		tableclasses = tableclasses.toArray();
+	}
+	if (tableclasses.length > 0)
+	{
+		// JScript array
+		attribs["tableclasses"] = tableclasses.length;
+		for (var i=1; i<=tableclasses.length; i++)
+		{
+			attribs["tableclasses."+i] = tableclasses[i-1];
+		}
+	}
+
+	// Output the hidden form field if on a supported browser
+	if ((browser != 'nswin' && browser != 'nsunix' && browser != 'nsmac') || this.ns4support)
+	{
+		output += "<input type=\"hidden\" id=\"" + name + "\" name=\"" + name + "\" value=\"" + contentForHTML + "\" />";
+	}
+
+	if (attribs['showsubmitbutton'] && attribs['submitbuttonname'] != '')
+	{
+		output += "<input type=\"hidden\" name=\"" + htmlspecialchars(attribs['submitbuttonname']) + "\" id=\"" + htmlspecialchars(attribs['submitbuttonname']) + "\" value=\"\" />";
+	}
+
+	// In MSIE we use the <object> tag to load the Sun Java plugin
+	if (browser == 'iewin')
+	{
+		output += '<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" id="'+name+'_applet" width="'+width+'" height="'+height+'"\n';
+		output += ' codebase="http://java.sun.com/products/plugin/autodl/jinstall-1_3_1_02-win.cab#Version=1,3,1,2">\n';
+		output += '  <param name="code" value="com.editize.EditizeApplet" />\n';
+		output += '  <param name="archive" value="editize.jar" />\n';
+		output += '  <param name="type" value="application/x-java-applet;jpi-version=1.3.1_02" />\n';
+		output += '  <param name="scriptable" value="true" />\n';
+		output += '  <param name="mayscript" value="true" />\n';
+		for (attrib in attribs) {
+			output += '  <param name="'+attrib+'" value="'+htmlspecialchars(attribs[attrib])+'" />\n';
+		}
+		output += '</object>\n';
+	}
+	// In NS4, we use an <embed> tag.
+	else if (browser == 'nswin' || browser == 'nsunix' || browser == 'nsmac')
+	{
+		if (ns4support)
+		{
+			attribs['ns4'] = 'true';
+			attribs['articleText'] = contentForJava;
+			output += '<embed type="application/x-java-applet;version=1.3"\n';
+			output += '  pluginspage="http://java.sun.com/j2se/1.3/"\n';
+			output += '  name="'+name+'_applet"\n';
+			output += '  id="'+name+'_applet"\n';
+			output += '  code="com.editize.EditizeApplet"\n';
+			output += '  archive="editize.jar"\n';
+			output += '  width="'+width+'"\n';
+			output += '  height="'+height+'"\n';
+			output += '  scriptable="true"\n';
+			output += '  mayscript="true"\n';
+			for (attrib in attribs)
+				output += '  '+attrib+'="'+htmlspecialchars(attribs[attrib])+'"\n';
+			output += '  pluginspage="http://java.sun.com/j2se/1.3/"\n';
+			output += '></embed>\n';
+		}
+		else // NS4 support disabled. Output a <textarea> for this browser instead
+		{
+			output += '<textarea name="' + name + '" id="' + name + '" rows="10" cols="40">\n';
+			output += contentForHTML + '</textarea>';
+		}
+	}
+	// In all other browsers, we assume Java2 <applet> tag support
+	else
+	{
+		// Lets the applet notify Opera users that Java 1.4+ is required.
+		if (browser.substring(0,5) == 'opera') attribs["opera"] = "true";
+		if (browser == 'opera6') attribs["opera6"] = "true";
+		// Instructs the applet to use an alternate submission method in OS X.
+		if (browser == 'ie5mac')
+		{
+			attribs['osx'] = 'true';
+			attribs['articleText'] = contentForJava;
+		}
+		output += '<applet code="com.editize.EditizeApplet"';
+		output += ' codebase="'+codebase+'"';
+		output += ' id="'+name+'_applet"';
+		output += ' archive="editize.jar"';
+		output += ' width="'+width+'" height="'+height+'"';
+		output += ' mayscript="true" scriptable="true">';
+		for (attrib in attribs)
+		{
+			if (attrib == 'codebase') continue;
+			output += '  <param name="'+attrib+'" value="'+htmlspecialchars(attribs[attrib])+'" />\n';
+		}
+		output += '</applet>\n';
+
+		// Provides iframe for alternate submission method support in OS X.
+		if (attribs['osx'])
+		{
+			output += "\t<iframe name=\""+name+"_submitframe\" width=\"0\" height=\"0\" style=\"display:none;\"></iframe>\n";
+		}
+	}
+
+	// Implant __submitEditize() onsubmit handler for the form if on a supported browser
+	if (!(browser == 'nswin' || browser == 'nsunix' || browser == 'nsmac') || ns4support)
+	{
+		output += "<script language=\"JavaScript\" type=\"text/javascript\">\n";
+		output += "var editizeAppletId = '"+name+"_applet';\n";
+		output += "var editizeForm = __getObj('"+name+"').form;\n";
+		output += "var submitHandler = null;\n";
+		output += "if (editizeForm.onsubmit != null && editizeForm.onsubmit != __submitEditize)\n";
+		output += "\tsubmitHandler = editizeForm.onsubmit;\n";
+		output += "__editizeArray[__editizeArray.length] = new Array(editizeAppletId, submitHandler);\n";
+		output += "editizeForm.onsubmit = __submitEditize;\n";
+		output += "</script>";
+	}
+	
+	return output;
+}
+
+function EndForm()
+{
+	output = ns4support ? '<div id="editize_submit_div" style="position: absolute;"></div>' : '';
+	output += '<script language="JavaScript" type="text/javascript">\n';
+	output += 'var editizeForm = __getObj(\'' + name + '\').form;\n';
+	output += 'for (var i = 0; i < editizeForm.elements.length; i++)\n';
+	output += '{\n';
+	output += '\tif (editizeForm.elements[i].type == "submit" &&\n';
+	output += '\t\t\teditizeForm.elements[i].onclick != __submitButtonEditize)\n';
+	output += '\t{\n';
+	output += '\t\teditizeForm.elements[i].editizeOnclick =\n';
+	output += '\t\t\t\teditizeForm.elements[i].onclick != null ?\n';
+	output += '\t\t\t\teditizeForm.elements[i].onclick : null;\n';
+	output += '\t\teditizeForm.elements[i].onclick = __submitButtonEditize;\n';
+	output += '\t}\n';
+	output += '}\n';
+	output += '</script>\n';
+
+	return output;
+}
+
+function DisplaySubmit()
+{
+	var text = "";
+	var width = 100;
+	var height = 30;
+	var submitname = "";
+	
+	if (arguments[0] != undefined) text = arguments[0];
+	if (arguments[1] != undefined) width = arguments[1];
+	if (arguments[2] != undefined) height = arguments[2];
+	if (arguments[3] != undefined) submitname = arguments[3];
+	
+	var output = "";
+	var browser = browserDetect();
+	
+	if (submitname != "" && !inArray(submitname, submitbuttonnames))
+	{
+		submitbuttonnames[submitbuttonnames.length] = submitname;
+		output += '<input type="hidden" name="' + submitname + '" id="' + submitname + '" value="" />';
+	}
+
+	if (browser == 'iewin')
+	{
+		output += '<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" width="'+width+'" height="'+height+'"\n';
+		output += '  codebase="http://java.sun.com/products/plugin/autodl/jinstall-1_3_1_02-win.cab#Version=1,3,1,2">\n';
+		output += '    <param name="codebase" value="'+codebase+'" />\n';
+		output += '    <param name="archive" value="editize.jar" />\n';
+		output += '    <param name="code" value="com.editize.EditizeSubmitter" />\n';
+		output += '    <param name="type" value="application/x-java-applet;jpi-version=1.3.1_02" />\n';
+		output += '    <param name="mayscript" value="true" />\n';
+		output += '    <param name="submitbuttonlabel" value="'+htmlspecialchars(text)+'" />\n';
+		if (submitname !== "") output += '    <param name="submitbuttonname" value="'+submitname+'" />\n';
+		output += '    <param name="fieldid" value="'+name+'" />\n';
+		output += '</object>\n';
+	}
+	else if (browser == 'nswin' || browser == 'nsunix' || browser == 'nsmac')
+	{
+		output += '<embed type="application/x-java-applet;version=1.3"\n';
+		output += '  pluginspage="http://java.sun.com/j2se/1.3/"\n';
+		output += '  codebase="'+codebase+'"\n';
+		output += '  archive="editize.jar"\n';
+		output += '  code="com.editize.EditizeSubmitter"\n';
+		output += '  width="'+width+'"\n';
+		output += '  height="'+height+'"\n';
+		output += '  mayscript="true"\n';
+		output += '  pluginspage="http://java.sun.com/j2se/1.3/"\n';
+		output += '  submitbuttonlabel="'+htmlspecialchars(text)+'"\n';
+		if (submitname !== "") output += '  submitbuttonname="'+submitname+'"\n';
+		output += '  fieldid="'+name+'"></embed>\n';
+	}
+	else
+	{
+		output += '<applet code="com.editize.EditizeSubmitter"\n';
+		output += '  codebase="'+codebase+'"\n';
+		output += '  archive="editize.jar"\n';
+		output += '  width="'+width+'" height="'+height+'"\n';
+		output += '  mayscript="true">\n';
+		output += '    <param name="submitbuttonlabel" value="'+htmlspecialchars(text)+'" />\n';
+		if (submitname !== "") output += '    <param name="submitbuttonname" value="'+submitname+'" />\n';
+		output += '    <param name="fieldid" value="'+name+'" />\n';
+		output += '    <param name="osx" value="'+trueOrFalse(browser == 'ie5mac')+'" />\n';
+		output += '</applet>\n';
+	}
+	
+	return output;
+}
+
+/**
+ * Converts whitespace characters no longer supported by
+ * JRE 1.3.1_01a or later to character codes that Editize
+ * will understand.
+ */
+function javaspecialchars(text)
+{
+	var newText, c, l;
+	if (text == undefined) text = "";
+	text = new String(text);
+	l = text.length;
+	newText = "";
+	for (var i=0; i<l; i++)
+	{
+		switch (c = text.charAt(i))
+		{
+			case '\n':
+				newText += '\\n';
+				break;
+			case '\r':
+				newText += '\\r';
+				break;
+			case '\t':
+				newText += '\\t';
+				break;
+			case '\\':
+				newText += '\\\\';
+				break;
+			default:
+				newText += c;
+		}
+	}
+	return newText;
+}
+
+function htmlspecialchars(text)
+{
+	var newText, c, l;
+	if (text == undefined) text = "";
+	text = new String(text);
+	l = text.length;
+	newText = "";
+	for (var i=0; i<l; i++)
+	{
+		switch (c = text.charAt(i))
+		{
+			case '<':
+				newText += '&lt;';
+				break;
+			case '>':
+				newText += '&gt;';
+				break;
+			case '&':
+				newText += '&amp;';
+				break;
+			case '"':
+				newText += '&quot;';
+				break;
+			default:
+				newText += c;
+		}
+	}
+	return newText;
+}
+
+/**
+ * Takes a boolean and returns a 'true' or 'false' string.
+ */
+function trueOrFalse(param)
+{
+	return param ? 'true' : 'false';
+}
+
+/**
+ * Browser detection code
+ */
+function browserDetect()
+{
+	var browser = "unknown";
+	if ( inAgent('Opera 6') || inAgent('Opera 5') )
+	{
+		browser = 'opera6';
+	}
+	else if ( inAgent('Opera') )
+	{
+		browser = 'opera';
+	}
+	else if ( inAgent('Safari') )
+	{
+		browser = 'safari';
+	}
+	else if ( inAgent('MSIE') )
+	{
+		if ( inAgent('Mac') )
+			browser = inAgent('MSIE 5') ? 'ie5mac' : 'ie4mac';
+		else if ( inAgent('Win') )
+			browser = 'iewin';
+	}
+	else
+	{
+		if ( inAgent('Mozilla/5') || inAgent('Mozilla/6') )
+		{
+			if ( inAgent('Mac OS X') ) browser = 'ns6mac';
+			else browser = 'ns6';
+		}
+		else if ( inAgent('Mozilla/4') )
+		{
+			if ( inAgent('Mac') ) browser = 'nsmac';
+			else if ( inAgent('Win') ) browser = 'nswin';
+			else browser = 'nsunix';
+		}
+	}
+	return browser;
+}
+
+/**
+ * Utility function used by browserDetect().
+ */
+function inAgent(agent)
+{
+    return new String(Request.ServerVariables("HTTP_USER_AGENT")).indexOf(agent) >= 0;
+}
+
+function inArray(needle, haystack) {
+	for (i = haystack.length - 1; i >= 0; i--) {
+		if (haystack[i] == needle) return true;
+	}
+	return false;
+}
+
+]]>
+</script>
+</component>

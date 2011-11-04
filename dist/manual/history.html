@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) Manual</title>
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+</head>
+<body>
+<div id="top"><img src="images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <span class="tab this">General</span> <a href="asp/index.html" class="tab">ASP</a>
+  <a href="aspdotnet/index.html" class="tab">ASP.NET</a> <a href="javascript/index.html" class="tab">JavaScript</a>
+  <a href="php/index.html" class="tab">PHP</a> </div>
+
+<div id="left">
+  <div id="subnav"> <a href="index.html">Introduction</a><img src="images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="quickstart.html">Quick Start Guide</a><img src="images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="features.html">List of Features</a><img src="images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="troubleshooting.html">Troubleshooting</a><img src="images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="history.html">Revision History</a><img src="images/marker.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="license.html">License Agreement</a><img src="images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center">
+  <h1>Revision History</h1>
+  <h2>Changes in Editize 2.12 - October 30, 2007</h2>
+  <ul>
+    <li>Fixed: Pasting content from OpenOffice.org would fail.</li>
+  </ul>
+  <h2>Changes in Editize 2.11a - March 16, 2007</h2>
+  <ul>
+    <li>The stripping of form elements introduced in 2.11 can now be switched off by setting the <code>formelementsallowed</code> property (see the Reference section for your selected API).</li>
+    <li>Fixed: Excess whitespace was added to the contents of textarea elements in HTML output.</li>
+  </ul>
+  <h2>Changes in Editize 2.11 - March 15, 2007</h2>
+  <ul>
+    <li>Form elements are now filtered out of HTML content that is loaded into Editize (including pasted content).</li>
+    <li>Security certificate updated. The certificate in previous versions expires on March 21, 2007 and will generate security warnings beginning on that date.</li>
+    <li>Fixed: occasionally, space was not allowed for the last line in a paragraph or other block.</li>
+    <li>Fixed: the left-align button would sometimes be highlighted on paragraphs that were not left-aligned.</li>
+  </ul>
+  <h2>Changes in Editize 2.10a - December 8, 2006</h2>
+  <ul>
+    <li>Fixed: hang in Java 6 when a floating image is larger than the document width.</li>
+  </ul>
+  <h2>Changes in Editize 2.10 - December 6, 2006</h2>
+  <ul>
+    <li>Fixed: compatibility with Java SE 6.</li>
+  </ul>
+  <h2>Changes in Editize 2.9 - February 22, 2005</h2>
+  <ul>
+    <li>Submission in Mozilla and Safari browsers on Mac OS X now uses LiveConnect for a huge speed boost. <em>Editize</em> now requires Safari 1.2 or later.</li>
+    <li>Major performance improvements when deleting complex document structures (e.g. large tables).</li>
+    <li>Major performance improvements when switching from Code View to WYSIWYG View.</li>
+    <li>The hyperlink dialog now contains a reminder that http:// is required on absolute URLs. </li>
+    <li>Fixed: major memory leak caused <em>Editize</em> to allocate more memory every time it was loaded in a page. You must update <code>kunststoff.jar</code>, not just <code>editize.jar</code> for this fix to work. </li>
+    <li>Fixed: typing Enter in a table cell inserted a space instead of a line break. </li>
+    <li>Fixed: repeatedly inserting line breaks produces strange behaviour. </li>
+    <li>Fixed: inserting a space before an image deletes the image. </li>
+    <li>Fixed: users could input multiple spaces in a row in WYSIWYG view.</li>
+    <li>Fixed: ampersands (<code>&amp;</code>) and other special characters in HTML attributes were not correctly escaped. </li>
+    <li>Fixed: <em>Editize</em> incorrectly output a line break in the HTML code following an <code>&lt;img&gt;</code> tag at the start a block.</li>
+    <li>Fixed: <em>Editize</em> could crash when loading/pasting a zero-border table nested within a table with a border. </li>
+    <li>Fixed: <em>Editize</em> could crash when editing an image that was inserted without dimensions.</li>
+    <li>Fixed: the PHP API could display a notice error on strict PHP configurations.</li>
+    <li>Fixed: in NS4 with the JavaScript API and multiple <em>Editize</em> fields in multiple forms, the wrong form could be submitted.</li>
+    <li>Fixed: with the ASP.NET API, <em>Editize</em> would fail to load in IE5/Mac.</li>
+  </ul>
+  <h2>Changes in Editize 2.8 - July 6, 2004</h2>
+  <ul>
+    <li>All supported browsers now work with standard HTML submit buttons. Java submit buttons are now deprecated.</li>
+    <li>New <code>endForm</code> method must be called for Netscape 4 compatibility and for HTML submit buttons to be submitted in some browsers (ASP, PHP, and JavaScript APIs only). See API documentation for details.</li>
+    <li>HTML code output by <em>Editize</em> is no longer word wrapped.</li>
+    <li>Improved robustness of license file checking in the face of non-critical HTTP errors.</li>
+    <li>Bold (<code>&lt;b&gt;</code>) and Italic (<code>&lt;i&gt;</code>) tags in a loaded document are now recognized by the Bold and Italic buttons on the toolbar. These buttons still only create <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> tags, though.</li>
+    <li>Fixed: Netscape 4 would crash when attempting to load or submit an <em>Editize</em> field larger than about 3KB.</li>
+    <li>Fixed: <em>Editize</em> sometimes added spaces around inline tags on submission, causing unwanted spaces in the resulting document.</li>
+    <li>Fixed: <em>Editize</em> could sometimes hang on startup, especially in Internet Explorer for Windows.</li>
+  </ul>
+  <h2>Changes in Editize 2.7 - February 10, 2004</h2>
+  <ul>
+    <li>Edit the properties of tables (align, width, height, border, padding, spacing, and summary text) from the right-click menu.</li>
+    <li>Edit the properties of table cells (cell type, and horizontal and vertical alignment) from the right-click menu.</li>
+    <li>Tweaked all APIs to avoid a JavaScript error occurring behind the scenes in Safari.</li>
+    <li>&quot;Edit Hyperlink&quot; item added to right-click menu when the cursor is in a hyperlink.</li>
+    <li>&quot;Edit Image&quot; item added to right-click menu when the cursor is on an image.</li>
+    <li>&quot;Editize version &lt;version&gt; started&quot; is now displayed in the browser status bar.</li>
+    <li>Fixed: The default red colour of highlighted text was not being applied.</li>
+    <li>Fixed: Selected text was not visible when a document background colour had not been assigned.</li>
+    <li>Fixed: Line breaks would not display properly and text was incorrectly centered in newly-created tables when running in Java 1.3.1.</li>
+  </ul>
+  <h2>Changes in Editize 2.6.10 - January 6, 2004</h2>
+  <ul>
+    <li>Handling of document structure when deleting at the start/end of list items and other nested block strucutres has been greatly improved.</li>
+    <li><em>Editize</em> now always includes an <code>alt</code> attribute in <code>&lt;img&gt;</code> tags, even if it's empty.</li>
+    <li>Reduced appearance of confusing &quot;Plain&quot; paragraph type by showing &quot;Table Cell&quot; and &quot;List Item&quot; when the cursor is placed in blocks of these types.</li>
+    <li>Improved caret/selection visibility when a background color is assigned. </li>
+    <li>Disabled ASP.NET 1.1 automatic form submission validation in ASP.NET examples to allow for submission of HTML content.</li>
+    <li>Added a PHP example script that demonstrates multiple Java submit buttons (<code>multisumbit.php</code>). </li>
+    <li>Fixed: APIs now support multiple submit buttons that have the same name.</li>
+    <li>Fixed: PHP did not correctly support Java submit buttons with assigned names. </li>
+    <li>Fixed: In rare circumstances, PHP API could fail to load the initial document. </li>
+    <li>Fixed: Create a hyperlink, begin typing, hyperlink stops after first character. </li>
+    <li>Fixed: Line breaks in HTML code were stripped on input, sometimes causing a loss of significant whitespace when reading HTML from the form or the clipboard.</li>
+    <li>Fixed: Color swatch on highlighted text icon was not being updated with assigned highlighted text color. </li>
+    <li>Fixed: Insert Image and Insert Table dialogs could sometimes get lost behind the browser window.</li>
+    <li>Fixed: System beep when opening certain dialogs (e.g. Insert Image).</li>
+  </ul>
+  <h2>Changes in Editize 2.6.9 - September 12, 2003</h2>
+  <ul>
+    <li>New text at the end of a hyperlink will no longer be linked.</li>
+    <li>Typing Enter in an empty list item will now end the list.</li>
+    <li>Typing Enter in untagged (&quot;Plain&quot;) content will now insert a line break
+        (<code>&lt;br /&gt;</code>) tag.</li>
+    <li>Old style clipboard hotkeys (Shift-Ins, Ctrl-Ins, Shift-DEL) now supported. </li>
+    <li>Fixed: Self-closing XHTML tags in clipboard content would cause spurious
+    characters to appear when pasted.</li>
+    <li>Fixed: Ghosted table edges would not be visible after pasting a
+      table with no border from an external source (e.g. Excel).</li>
+    <li>Fixed: Could not paste a portion of a paragraph copied from Word.</li>
+    <li>Fixed: Copying the entire contents of a table cell and then pasting would
+      sometimes produce a corrupt document structure.</li>
+    <li>Fixed: Specifying suggested link URLs in the ASP API for JavaScript did
+      not work.</li>
+    <li>Fixed: The Java submit button didn't work in Safari or Mozilla browsers
+      for Mac OS X.</li>
+    <li>Fixed: Internal submit button may not have displayed when requested under
+      some conditions. </li>
+  </ul>
+  <h2>Changes in Editize 2.6.8 - August 19, 2003</h2>
+  <ul>
+  <li>Regression fixed: Compatibility with Java 1.4.2 restored.</li>
+  </ul>
+  <h2>Changes in Editize 2.6.7 - August 15, 2003</h2>
+  <ul>
+    <li>Added full support for the Safari browser on Mac OS X.</li>
+    <li>The filename extension of the license file can now be changed in the ASP,
+      PHP, and JavaScript APIs as well as the ASP.NET API (see the <code>licensefileext</code>
+      property in the reference for your API).</li>
+    <li>The order of the indent and outdent buttons in the toolbar have been
+      swapped to improve usability.</li>
+    <li>Fixed: <em>Editize</em> could not edit an existing image until after a
+    new image had been created.</li>
+    <li>Fixed: The Java submit button did not work in the ASP API.</li>
+  </ul>
+  <h2>Changes in Editize 2.6.6 - July 4, 2003</h2>
+
+  <ul>
+    <li>Fixed: A bug in the newly-released Java 1.4.2 caused <em>Editize</em>
+      to display as a grey box.</li>
+    <li>Fixed: The PHP API for <em>Editize</em> would not allow you to set a document
+      background color unless you had also specified a base font face. This bug
+      could also cause the applet to crash if you had <em>only</em> specified
+      a base font face. </li>
+  </ul>
+  <h2>Changes in Editize 2.6.5 - June 27, 2003</h2>
+
+    <ul>
+        <li><em>Editize</em> now lets the developer configure the background color
+            displayed behind the document, to better match Web sites with colored
+            backgrounds. Refer to the new 'bgcolor' attribute of your API of choice
+            for further details.</li>
+        <li><em>Editize</em> output is now fully XHTML compliant! <em>Editize</em>
+            can also correctly read XHTML-compliant self-closing tags (e.g. <code>&lt;br&nbsp;/&gt;</code>).</li>
+        <li>You can now put more than one Java submit button on a page, identifying
+            each with a name - just as you would normal HTML submit buttons. When
+            the form is submitted with one of these buttons, a field with the
+            specified name will be submitted. For example, you can create matching
+            'Update' and 'Cancel' Java submit buttons using this feature. Refer
+            to the new 'submitbuttonname' attribute of your API of choice for
+            further details.</li>
+        <li>Improved robustness of Image Insert. Uneeded attributes are no longer
+            added to the document.</li>
+        <li><code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> tags replaced with
+            <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> tags for better
+            compliance with current standards.</li>
+        <li>Fixed: <em>Editize</em> would not split a list item when the user
+            pressed Enter.</li>
+    </ul>
+  <h2>Changes in Editize 2.6.4 - May 16, 2003</h2>
+
+  <ul>
+    <li>Submission on Mac OS X should be four times as fast as in previous releases.</li>
+    <li><em>Editize</em> can now edit HTML code that is not surrounded with block
+      tags. <em>Editize</em> will show the paragraph style of such content as
+      &quot;Plain&quot;. This is useful for editing fragments of HTML intended
+      for inline display.</li>
+    <li>The &quot;Inset&quot; paragraph type has been removed and replaced with
+      &quot;Inset&quot; and &quot;Outset&quot; buttons in the toolbar. This allows
+      the user to create multiple levels of indented content, and to create indented
+      headings, code blocks, etc. In a future release, these buttons will also
+      allow the user to create nested lists.</li>
+    <li>Typing a Tab while in a table cell will move the cursor to the start of
+      the next table cell. When in the last cell of a table, typing Tab adds a
+      new row to the bottom of the table.</li>
+    <li>The &quot;About Editize&quot; item on the pop-up menu can now be hidden
+      with the 'about' parameter in all four APIs.</li>
+    <li>Opera 7 is now supported, in addition to Opera 6.</li>
+    <li>Fixed: The developer-specified hyperlink color was being ignored.</li>
+    <li>Fixed: &quot;Undefined is undefined&quot; error that was causing submissions
+      to fail in some versions of Internet Explorer for Mac OS X.</li>
+  </ul>
+  <h2>Changes in Editize 2.6.3 - March 22, 2003</h2>
+    <ul>
+        <li>A new code signing certificate, valid until March 2004, replaces the
+            one used on previous builds, which expires today.</li>
+        <li>Debug output for paste operations that was added in the previous build
+            has now been removed. See <a href="troubleshooting.html">Troubleshooting
+            </a>for details on the clipboard issue.</li>
+        <li>Tables with a border size of 0 now have light gray, visible borders
+            in the WYSIWYG view presented by <em>Editize</em>.</li>
+        <li>All APIs now allow the developer to set the background color that
+            appears around the applet if it has a non-rectangular outline (i.e.
+            due to the 'WYSIWYG' and 'Code View' tabs, or due to the built-in
+            Java submit button).</li>
+        <li>The mouse cursor is now an I-beam over the WYSIWYG editing area, instead
+            of a standard arrow pointer.</li>
+        <li>The <a href="http://www.w3.org/TR/html401/types.html#h-6.5">16 standard
+            HTML color names</a> are now recognized and supported by all color
+            configuration properties.</li>
+        <li>Fixed: The <code>showsubmitbutton</code> property in the JavaScript
+            API was not being correctly processed.</li>
+    </ul>  <h2>Changes in Editize 2.6.2 - January 31, 2003</h2>
+  <ul>
+    <li><em>Editize</em> now intelligently &quot;scrubs&quot; HTML attributes
+      added by Microsoft Word (and other Microsoft applications) when pasting
+      from the clipboard. As a side-effect of this feature, <em>Editize</em> no
+      longer supports the <code>style</code> attribute on any tags. Please contact
+      support if this negatively impacts your application.</li>
+    <li>Submitting a form with Editize's Java submit button will now correctly
+      trigger and respect the return value of an <code>onSubmit</code> event handler
+      assigned to the form.</li>
+    <li>Added the <code><a href="aspdotnet/reference.html#licensefileext">LicenseFileExt</a></code><a href="aspdotnet/reference.html#licensefileext">
+      property</a> to the ASP.NET API that allows you to give <em>Editize</em>
+      license files a file extension other than <code>.lic</code>. This is to
+      allow Editize to be deployed under IIS on Windows 2003 Server, where <code>.lic</code>
+      files have a special meaning.</li>
+    <li>Paste operations now output extensive debug information to the Java Console.
+      This will assist support personnel in debugging issues with the clipboard.</li>
+  </ul>
+  <h2> Changes in Editize 2.6.1 - December 29, 2002</h2>
+  <ul>
+    <li>Fixed: Heading and subheading fonts were not configurable in ASP.NET.</li>
+    <li>Fixed: JavaScript API was not passing suggested link URLs to applet.</li>
+  </ul>
+  <h2>Changes in Editize 2.6.0 - December 4, 2002</h2>
+  <ul>
+    <li>Added support for domain licenses, which will be offered for sale shortly.</li>
+  </ul>
+  <h2>Changes in Editize 2.5.0 - November 29, 2002</h2>
+  <ul>
+    <li>Mac OS X submission slowed down; parts of documents were being lost on
+	  machines with slower connections.</li>
+	<li>Fixed: Netscape 4 for Linux was pointing the user to the wrong plugin
+	  download URL.</li>
+    <li>Fixed: Mac OS X submission did not work on servers where <code>.html</code>
+	  files were parsed as PHP scripts (this affects many Mac OS X servers).</li>
+  </ul>
+  <h2>Changes in Editize 2.5.0 Beta - November 27, 2002</h2>
+  <ul>
+    <li>Code View tab added by popular demand! This feature is disabled by default;
+      consult your selected API's documentation to enable it.</li>
+  	<li>Code indenting restored by popular demand.</li>
+    <li>The cursor is now placed at the start of the document when the applet
+      is loaded, instead of at the end.</li>
+    <li>Fixed: The 'Home' key would not work on the first line of a document.</li>
+    <li>Fixed: Highlighted text (and other <code>&lt;span&gt;</code> tags) were
+      not preserved when pasting from the clipboard.</li>
+    <li>Fixed: Select all then Delete caused the undo history to become invalid.</li>
+  </ul>
+  <h2>Changes in Editize 2.1.1 - November 14, 2002</h2>
+  <ul>
+    <li>Fixed: character-level tag output was broken.</li>
+  </ul>
+  <h2>Changes in Editize 2.1.0 - November 13, 2002</h2>
+  <ul>
+    <li>Table support added.</li>
+    <li>Added toolbar buttons for cut, copy, paste, undo, redo, with an option
+      to hide them in all APIs.</li>
+    <li>Improved the icons for the cut, copy, paste, undo, and redo actions.</li>
+    <li>Toolbar icons now wrap to a second row if the applet is not large enough
+      to accomodate all the buttons.</li>
+    <li>&quot;Preserve shape&quot; checkbox added to the Insert Image dialog to
+      maintain image aspect ratio.</li>
+    <li>Double-click in image list confirms choice.</li>
+    <li>'Paragraph' and 'Character' text labels removed from the toolbar by popular
+      demand. </li>
+    <li>Plugin auto-download URL for Netscape 4.x fixed in ASP.NET API.</li>
+    <li>Various inset paragraph bugs fixed.</li>
+    <li>Clipboard error when pasting a selection that was copied from the end
+      of a list item fixed.</li>
+  </ul>
+  <h2>Changes in Editize 2.0.2 - October 15, 2002</h2>
+  <ul>
+    <li>Image list dialog incompatibility with Mac OS 10.2 fixed.</li>
+    <li>Improved bold, italic, and underline handling in loaded documents.</li>
+    <li>Highlighted text now correctly handled in loaded documents.</li>
+    <li>Rare hang on load issue fixed.</li>
+  </ul>
+  <h2>Changes in Editize 2.0.1 - October 11, 2002</h2>
+  <ul>
+    <li>Improved compatibility with Mac OS 10.2.</li>
+    <li>Corrected plugin auto-download URL for Netscape 4.x.</li>
+  </ul>
+  <h2>Changes in Editize 2.0 - September 24, 2002</h2>
+  <ul>
+    <li>The image list dialog no longer sorts the list of images. This allows
+      you to define your own sort order as you see fit.</li>
+    <li>Fixed: The descriptions in the image list were not being handled correctly.</li>
+    <li>Much improved documentation, with code generators for all available APIs.</li>
+  </ul>
+  <h2>Changes in Editize 2.0 Beta 2 - September 16, 2002</h2>
+  <ul>
+    <li>Support for MSIE 5 and Mozilla for Mac OS X 10.1 (with Java 1.3.1 Update
+      1 installed) or later.</li>
+    <li> Image list support.</li>
+    <li> Editing of existing images in the document supported.</li>
+    <li> PHP API enhanced to allow code to be read into a variable, for use in
+      templating systems.</li>
+    <li> Compatibility mode submit button now in a separate applet, providing
+      greater layout flexibility.</li>
+    <li>Lists (ordered and unordered) now behave as in previous releases.</li>
+    <li>Left/Right aligned images now correctly reflow text in subsequent paragraphs.</li>
+    <li>Inserted images no longer behave as two characters instead of one.</li>
+  </ul>
+  <h2>Changes in Editize 2.0 Beta 1 - August 9, 2002</h2>
+  <ul>
+    <li>Completely re-written HTML display/editing engine should be more stable.
+      Supports display of most HTML 3.2 and some HTML 4.0 elements.</li>
+    <li>Line breaks supported (Shift-Enter).</li>
+    <li>Image insert supported (new toolbar icon).</li>
+    <li> Hyperlinks can now be edited by clicking the hyperlink button with the
+      cursor in a link.</li>
+    <li> New shortcut: Ctrl-K for hyprelink.</li>
+    <li> Output code no longer indented -- should save space in many a CMS database.</li>
+    <li> All text fields should now support cut/copy/paste keyboard shortcuts.</li>
+    <li> Several rare HTML parsing issues.</li>
+  </ul>
+  <h2>Changes in Editize 1.0.5 - August 12, 2002</h2>
+  <ul>
+  <li>&lt;br&gt; tags in first paragraph were ignored.</li>
+  <li>172.[16-31].*.* now correctly identified as private network IP.</li>
+  <li>JavaScript API failed to load Editize on non-MSIE browsers.</li>
+  </ul>
+  <h2>Changes in Editize 1.0.4 - June 6, 2002</h2>
+  <ul>
+    <li>In supported browsers (MSIE, Opera), Editize fields now retain their updated
+      contents if your press 'Back' after submitting the form.</li>
+    <li>Delete previous word and delete next word with Ctrl-Backspace and Ctrl-Delete.</li>
+    <li> APIs now support forms with onSubmit event handlers (e.g. for form validation).</li>
+    <li> Fixed: In rare PHP configurations, the PHP API's browser detection could
+      produce a warning message.</li>
+    <li> Fixed: If the form was submitted before Editize finished loading, the
+      Editize field would submit a blank document.</li>
+  </ul>
+  <h2> Changes in Editize 1.0.3 - May 29, 2002</h2>
+  <ul>
+    <li>Ampersands in href attributes now encoded as &amp;amp; as per XHTML spec.</li>
+    <li>Fixed: A Netscape 4 bug caused it to ignore the pluginspage attribute
+      and use the codebase URL instead.</li>
+    <li> Fixed: Netscape 4 forced the user to download Java 1.3.1_02 even if a
+      later version of Java was installed.</li>
+  </ul>
+  <h2>Changes in Editize 1.0.2 - May 23, 2002</h2>
+  <ul>
+    <li>Fixed: PHP API and samples now work with error_reporting set to E_ALL
+      in php.ini.</li>
+    <li> Fixed: ASP API required Visual C++ 7.0 runtime libraries on the server
+      computer.</li>
+  </ul>
+  <h2>Changes in Editize 1.0.1 - May 22, 2002</h2>
+  <ul>
+    <li>Fixed: Under Windows 98/ME, pasting HTML content from Microsoft applications
+      would not always work.</li>
+    <li>Fixed: Certain MS Word special characters (e.g. em dash, ellipsis) could
+      cause misplaced characters when pasting into Editize.</li>
+    <li> A few small documentation typos fixed.</li>
+    <li> Editize now recognizes &lt;br&gt; tags in pasted HTML content.</li>
+  </ul>
+  <h2>Editize 1.0 - May 17, 2002</h2>
+  <p>First public release.</p>
+  <div id="footer">
+    <p><a href="index.html">Introduction</a> | <a href="quickstart.html">Quick
+      Start Guide</a> | <a href="features.html">List of Features</a> | <a href="history.html">Revision
+      History</a> | <a href="license.html">License Agreement</a></p>
+  </div>
+</div>
+</body>
+</html>

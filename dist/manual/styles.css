@@ -1,0 +1,171 @@
+body, p, li, dt, dd, td, th {
+	font-family: "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+body {
+	background-color: #fff;
+	margin: 0px 0px 0px 0px;	/* n6.01win-mac won't recognize top margin for middle box, so it goes here */
+	padding: 0px 0px 0px 0px;
+}
+h1 {
+	font: normal 18px arial, sans-serif;
+	color: #036;
+}
+h2 {
+	font: bold 13px /1 arial, sans-serif;
+	margin: 20px 0px 5px 0px;
+	border-bottom: 1px solid #036;
+	color: #036;
+}
+h3, legend {
+	font: bold 14px arial, sans-serif;
+	color: #f60;
+}
+h4 {
+	font: bold 12px arial, sans-serif;
+	color: #000;
+}
+th {
+	padding-right: 10px;
+	text-align: left;
+	}
+img {
+	border: 0 none;
+	}
+a {
+	color: #03C;
+	}
+a:hover {
+	color: #f60;
+	}
+a.tab {
+	text-decoration: none;
+	}	
+a:hover.tab {
+	text-decoration: none;
+	color: #f60;
+	}
+code, tt, pre {
+	font-size: 11pt;
+}
+dd {
+	margin-bottom: 1em;
+}
+.note {
+	font-size: 80%;
+}
+.tab {
+	border: 2px solid #000;
+	border-bottom: none;
+	position: relative;
+	top: 0px;
+	padding: 4px 12px;
+	font: bold 12px /1 arial, sans-serif;
+	color: black;
+	background-color: #D1D9DF;
+	margin: 2px;
+}
+.this {
+	border-bottom: 2px solid white;
+	background-color: #fff;
+}
+#top {
+	border-bottom: 2px solid black;
+	padding: 0px;
+	margin: 0px;
+	background-color: #9AB4CA ;
+}
+#nav {
+	position: absolute;
+	z-index: 3;
+	left: 0px;
+	top: 63px;
+	text-align: right;
+	width: 99%;
+	padding: 0px;
+	margin: 0px;
+	font: bold 12px /1 arial, sans-serif;
+}
+#subnav {
+	font: bold 13px arial, sans-serif;
+	text-align: right;
+	border: 0px solid #777;
+}
+div#subnav a {
+	text-decoration: none;
+}
+div#subnav hr {
+	height: 1px;
+	width: 100px;
+	color: #B7C6DF;
+}
+#left {
+	position: absolute;
+	top: 102px;
+	left: 0px;
+	margin: 0px;
+	padding: 28px 10px;
+	border: 0px solid #f00;
+	width: 180px; 			/* ie5win fudge begins (was 150px) */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width: 180px; 			/* the real width is this one */
+}	
+html>body #left {
+	width: 180px; 			/* ie5win fudge ends */
+}
+#center {
+	margin: 0px 0px 0px 200px; 	/* n6.01win n6mac won't recognize top margin for middle box, so it goes in body */
+	padding: 25px 2%;
+	border: 0px solid #00f;
+}
+div#footer p {
+	text-align: center;
+	margin: 2px;
+	}
+	
+div#footer a {
+	color: black;
+	}
+	
+div#footer a:hover {
+	color: #03c;
+	}
+table#filelist tr td
+{
+	vertical-align: top;
+	border-top: 1px solid #000;
+	margin: 0px;
+	padding: 5px;
+}
+table#filelist
+{
+	border-bottom: 1px solid #000;
+}
+
+/* Code highlighting */
+.tag
+{
+	color: #00f;
+}
+
+.tagname
+{
+	color: #900
+}
+
+.attributename
+{
+	color: #f00;
+}
+fieldset
+{
+	padding: 10px;
+	border: none;
+}
+fieldset p, fieldset table
+{
+	margin-left: 30px;
+}

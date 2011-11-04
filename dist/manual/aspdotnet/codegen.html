@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) API for ASP.NET</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+<link href="../styles.css" rel="stylesheet" type="text/css">
+<script language="JavaScript">
+function generateCode()
+{
+	__getObj('libcodediv').style.display = 'block';
+	
+	__getObj('fieldcodediv').style.display = 'block';
+	var codefield = __getObj('fieldcode');
+	codefield.value = '<SitePoint:Editize runat="server" id="'+__getObj('fieldname').value+'"\n';
+
+	if (__getObj('widthunits').options[__getObj('widthunits').selectedIndex].value == '%')
+		codefield.value += '  Width="'+__getObj('fieldwidth').value+'%" ';
+	else
+		codefield.value += '  Width="'+__getObj('fieldwidth').value+'px" ';
+
+	if (__getObj('heightunits').options[__getObj('heightunits').selectedIndex].value == '%')
+		codefield.value += 'Height="'+__getObj('fieldheight').value+'%"\n';
+	else
+		codefield.value += 'Height="'+__getObj('fieldheight').value+'px"\n';
+
+	codefield.value += '  Codebase="'+__getObj('publicurl').value+'"\n';
+	
+	disableFeatureIfUnchecked('editbuttons','EditButtons');
+	disableFeatureIfUnchecked('paragraphstyles','ParagraphStyles');
+	disableFeatureIfUnchecked('headingstyle','HeadingStyle');
+	disableFeatureIfUnchecked('subheadingstyle','SubheadingStyle');
+	disableFeatureIfUnchecked('insetstyle','InsetStyle');
+	disableFeatureIfUnchecked('monospacedstyle','MonospacedStyle');
+	disableFeatureIfUnchecked('paragraphalignment','ParagraphAlignments');
+	disableFeatureIfUnchecked('bulletlists','BulletLists');
+	disableFeatureIfUnchecked('numberedlists','NumberedLists');
+	disableFeatureIfUnchecked('boldtext','BoldText');
+	disableFeatureIfUnchecked('italictext','ItalicText');
+	disableFeatureIfUnchecked('underlinedtext','UnderlineText');
+	disableFeatureIfUnchecked('highlightedtext','HighlightText');
+	disableFeatureIfUnchecked('inlinecode','InlineCode');
+	disableFeatureIfUnchecked('hyperlinks','Hyperlinks');
+	disableFeatureIfUnchecked('images','Images');
+	disableFeatureIfUnchecked('tables','Tables');
+	disableFeatureIfUnchecked('about','About');
+	enableFeatureIfChecked('codeview','CodeView');
+	
+	propertyIfNotEmpty('BGColor',__getObj('bgcolor').value);
+	propertyIfNotEmpty('AppletBgColor',__getObj('appletbgcolor').value);
+	propertyIfNotEmpty('BaseFontFace',__getObj('defaultfontfamily').value);
+	propertyIfNotEmpty('BaseFontSize',__getObj('defaultfontsize').value);
+	propertyIfNotEmpty('BaseFontColor',__getObj('defaultfontcolor').value);
+	propertyIfNotEmpty('HeadFontFace',__getObj('headingfontfamily').value);
+	propertyIfNotEmpty('HeadFontSize',__getObj('headingfontsize').value);
+	propertyIfNotEmpty('HeadFontColor',__getObj('headingfontcolor').value);
+	propertyIfNotEmpty('SubheadFontFace',__getObj('subheadingfontfamily').value);
+	propertyIfNotEmpty('SubheadFontSize',__getObj('subheadingfontsize').value);
+	propertyIfNotEmpty('SubheadFontColor',__getObj('subheadingfontcolor').value);
+	propertyIfNotEmpty('InsetFontFace',__getObj('insetfontfamily').value);
+	propertyIfNotEmpty('InsetFontSize',__getObj('insetfontsize').value);
+	propertyIfNotEmpty('InsetFontColor',__getObj('insetfontcolor').value);
+	propertyIfNotEmpty('MonospacedBackgroundColor',__getObj('monospacedbgcolor').value);
+	propertyIfNotEmpty('HighlightColor',__getObj('highlightcolor').value);
+	propertyIfNotEmpty('LinkColor',__getObj('hyperlinkcolor').value);
+	propertyIfNotEmpty('BaseURL',__getObj('baseurl').value);
+	propertyIfNotEmpty('ImgListUrl',__getObj('imglisturl').value);
+
+	var linkurls = __getObj('suggurls').value;
+	var linksexist = false;
+	while (linkurls.length > 0)
+	{
+		var loc = linkurls.indexOf('\n');
+		var linkurl = (loc >= 0) ? linkurls.substring(0,loc-1) : linkurls;
+		if (!linksexist)
+		{
+			linksexist = true;
+			codefield.value += 'LinkUrls="';
+		}
+		else codefield.value += ',';
+		codefield.value += linkurl;
+		linkurls = (loc >= 0 && linkurls.length > loc+1) ? linkurls.substring(loc+1) : '';
+	}
+	if (linksexist) codefield.value += '"\n';
+	
+	codefield.value += '/>';	
+
+	__getObj('libcodediv').scrollIntoView(true);
+}
+function disableFeatureIfUnchecked(checkboxid,featurename)
+{
+	if (__getObj(checkboxid).checked == false)
+		__getObj('fieldcode').value += '  ' + featurename + '="false"\n';
+}
+function enableFeatureIfChecked(checkboxid,featurename)
+{
+	if (__getObj(checkboxid).checked == true)
+		__getObj('fieldcode').value += '  ' + featurename + '="true"\n';
+}
+function propertyIfNotEmpty(property,value)
+{
+	if (value != '')
+		__getObj('fieldcode').value += '  '+property+'="'+value+'"\n';
+}
+function __getObj(id)
+{
+	if (document.getElementById) { // DOM-compliant browsers (MSIE5+, NSN6+, O5+)
+		return document.getElementById(id);
+	} else if (document.all) { // MSIE4
+		return document.all[id];
+	} else { // NSN4
+		for (var i=0;i<document.forms.length;i++)
+		{
+			if (document.forms[i].elements[id])
+				return document.forms[i].elements[id];
+		}
+		return eval("document."+id); // If all else fails...
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="top"><img src="../images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <a href="../index.html" class="tab">General</a> <a href="../asp/index.html" class="tab">ASP</a> 
+  <span class="tab this">ASP.NET</span> <a href="../javascript/index.html" class="tab">JavaScript</a> 
+  <a href="../php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Getting Started</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="codegen.html">Code Generator</a><img src="../images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="reference.html">API Reference</a><img src="../images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="../troubleshooting.html">Troubleshooting</a><img src="../images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center"> 
+  <h1>Editize&#8482; Code Generator for the ASP.NET API</h1>
+  <p> The form on this page will allow you to quickly and automatically generate 
+    the code to insert an <em>Editize</em> field into any form on your site. Simply 
+    fill in the information and click 'Generate Code Now' at the bottom of the 
+    form to obtain the required code.</p>
+  <form name="form1" method="post" action="javascript:void(0);">
+    <h2>Basic Parameters</h2>
+    <fieldset>
+    	
+    <legend>The Editize files (editize.jar, etc.) are located here:</legend>
+    <p> 
+      <label>Publically-accessible URL:<br>
+      <input name="publicurl" type="text" id="publicurl" value="http://www.yoursite.com/editize" size="50">
+      </label>
+    </p>
+    </fieldset>
+    <fieldset>
+    <legend>Field properties:</legend>
+    <p> 
+      <label>Form field name/control ID: 
+      <input name="fieldname" type="text" id="fieldname" value="editize" size="20">
+      </label>
+    </p>
+    <p> 
+      <label>Width: 
+      <input name="fieldwidth" type="text" id="fieldwidth" value="600" size="7">
+      <select name="widthunits" id="widthunits">
+        <option value="px" selected>pixels</option>
+        <option value="%">%</option>
+      </select>
+      </label>
+    </p>
+    <p> 
+      <label>Height:</label>
+      <input name="fieldheight" type="text" id="fieldheight" value="600" size="7">
+      <select name="heightunits" id="heightunits">
+        <option value="px" selected>pixels</option>
+        <option value="%">%</option>
+      </select>
+    </p>
+    </fieldset>
+    <h2>Available Features</h2>
+    <fieldset>
+    <legend>Paragraph-level formatting features</legend>
+    <table border="0">
+      <tr>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+      </tr>
+      <tr> 
+        <td width="33%" nowrap> <label> 
+          <input name="paragraphstyles" type="checkbox" id="paragraphstyles" value="checked" checked>
+          Paragraph styles</label></td>
+        <td width="33%" nowrap> <label> 
+          <input name="headingstyle" type="checkbox" id="headingstyle" value="checked" checked>
+          'Heading' paragraph style</label></td>
+        <td width="33%" nowrap> <label> 
+          <input name="subheadingstyle" type="checkbox" id="subheadingstyle" value="checked" checked>
+          'Subheading' paragraph style</label></td>
+      </tr>
+      <tr> 
+        <td nowrap> <label> 
+          <input name="insetstyle" type="checkbox" id="insetstyle" value="checked" checked>
+          'Inset' paragraph style</label></td>
+        <td nowrap> <label> 
+          <input name="monospacedstyle" type="checkbox" id="monospacedstyle" value="checked" checked>
+          'Monospaced' paragraph style</label></td>
+        <td nowrap> <label> 
+          <input name="paragraphalignment" type="checkbox" id="paragraphalignment" value="checked" checked>
+          Paragraph alignments</label></td>
+      </tr>
+      <tr> 
+        <td nowrap> <label> 
+          <input name="bulletlists" type="checkbox" id="bulletlists" value="checked" checked>
+          Bullet lists</label></td>
+        <td nowrap> <label> 
+          <input name="numberedlists" type="checkbox" id="numberedlists" value="checked" checked>
+          Numbered lists</label></td>
+        <td nowrap>&nbsp;</td>
+      </tr>
+    </table>
+    </fieldset>
+    <fieldset>
+    <legend>Character-level formatting features</legend>
+    <table border="0">
+      <tr> 
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+      </tr>
+      <tr> 
+        <td width="33%" nowrap> <label> 
+          <input name="boldtext" type="checkbox" id="boldtext" value="checked" checked>
+          Bold text</label></td>
+        <td width="33%" nowrap> <label> 
+          <input name="italictext" type="checkbox" id="italictext" value="checked" checked>
+          Italic text</label></td>
+        <td width="33%" nowrap> <label> 
+          <input name="underlinedtext" type="checkbox" id="underlinedtext" value="checked" checked>
+          Underlined text</label></td>
+      </tr>
+      <tr> 
+        <td nowrap> <label> 
+          <input name="highlightedtext" type="checkbox" id="highlightedtext" value="checked" checked>
+          Highlighted text</label></td>
+        <td nowrap> <label> 
+          <input name="inlinecode" type="checkbox" id="inlinecode" value="checked" checked>
+          Inline code</label></td>
+        <td nowrap> <label> 
+          <input name="hyperlinks" type="checkbox" id="hyperlinks" value="checked" checked>
+          Hyperlinks</label></td>
+      </tr>
+	</table>
+	</fieldset>
+	<fieldset>
+	<legend>Other features</legend>
+	<table border="0">
+      <tr> 
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+        <td nowrap><img src="../images/x.gif" width="1" height="1" hspace="100" vspace="0" border="0"></td>
+      </tr>
+      <tr> 
+        <td width="33%" nowrap><label> 
+          <input name="editbuttons" type="checkbox" id="editbuttons" value="checked" checked>
+          Standard Edit Buttons</label></td>
+        <td width="33%" nowrap> <label> 
+          <input name="images" type="checkbox" id="images" value="checked" checked>
+          Images</label></td>
+        <td width="33%" nowrap><label> 
+          <input name="tables" type="checkbox" id="tables" value="checked" checked>
+          Tables</label></td>
+      </tr>
+      <tr> 
+        <td width="33%" nowrap><label> 
+          <input name="codeview" type="checkbox" id="codeview" value="checked">
+          'Code View' tab</label></td>
+        <td width="33%" nowrap><label> 
+          <input name="about" type="checkbox" id="about" value="checked" checked>
+          'About Editize' menu item</label></td>
+      </tr>
+    </table>
+    </fieldset>
+    <h2>Display Properties</h2>
+    <p>Adjust these properties to match the formatting that will be applied to 
+      the document that <em>Editize</em> creates when it is eventually displayed 
+      (e.g. by your Content Management System).</p>
+        
+    <p><strong>Leave blank any fields for which you want <em>Editize</em> to use 
+      browser defaults.</strong></p>
+    <fieldset>
+    <legend>Background colors</legend>
+    <p> 
+      <label>Document background (e.g. #ffffff or white): 
+      <input name="bgcolor" type="text" id="bgcolor">
+      </label>
+    </p>
+    <p> 
+      <label>Applet background (e.g. #000000 or black): 
+      <input name="appletbgcolor" type="text" id="appletbgcolor">
+      </label>
+    </p>
+    </fieldset>
+    <fieldset>
+    <legend>Default font properties</legend>
+    <p> 
+      <label>Font family (e.g. Verdana):<br>
+      <input name="defaultfontfamily" type="text" id="defaultfontfamily" size="50">
+      </label>
+    </p>
+    <p> 
+      <label>Size: 
+      <input name="defaultfontsize" type="text" id="defaultfontsize" size="7">
+      pixels</label>
+    </p>
+    <p> 
+            <label>Color (e.g. #000000 or black): 
+            <input name="defaultfontcolor" type="text" id="defaultfontcolor">
+      </label>
+    </p>
+    </fieldset>
+<fieldset>
+    <legend>Heading font properties</legend>
+    <p> 
+      <label>Font family (e.g. Verdana):<br>
+      <input name="headingfontfamily" type="text" id="headingfontfamily" size="50">
+      </label>
+    </p>
+    <p> 
+      <label>Size: 
+      <input name="headingfontsize" type="text" id="headingfontsize" size="7">
+      pixels</label>
+    </p>
+    <p> 
+            <label>Color (e.g. #000000 or black): 
+            <input name="headingfontcolor" type="text" id="headingfontcolor">
+      </label>
+    </p>
+    </fieldset>
+<fieldset>
+    <legend>Subheading font properties</legend>
+    <p> 
+      <label>Font family (e.g. Verdana):<br>
+      <input name="subheadingfontfamily" type="text" id="subheadingfontfamily" size="50">
+      </label>
+    </p>
+    <p> 
+      <label>Size: 
+      <input name="subheadingfontsize" type="text" id="subheadingfontsize" size="7">
+      pixels</label>
+    </p>
+    <p> 
+            <label>Color (e.g. #000000 or black): 
+            <input name="subheadingfontcolor" type="text" id="subheadingfontcolor">
+      </label>
+    </p>
+    </fieldset>
+<fieldset>
+    <legend>Indented block properties</legend>
+    <p> 
+      <label>Font family (e.g. Verdana):<br>
+      <input name="insetfontfamily" type="text" id="insetfontfamily" size="50">
+      </label>
+    </p>
+    <p> 
+      <label>Size: 
+      <input name="insetfontsize" type="text" id="insetfontsize" size="7">
+      pixels</label>
+    </p>
+    <p> 
+            <label>Color (e.g. #000000 or black): 
+            <input name="insetfontcolor" type="text" id="insetfontcolor">
+      </label>
+    </p>
+    </fieldset>
+ <fieldset>
+    <legend>Monospaced font properties</legend>
+    <p> 
+      <label>Background Color (e.g. #F0F0F0): 
+      <input name="monospacedbgcolor" type="text" id="monospacedbgcolor">
+      </label>
+    </p>
+ </fieldset>
+<fieldset>
+    <legend>Highlighted text properties</legend>
+    <p> 
+            <label>Color (e.g. #FF0000 or red): 
+            <input name="highlightcolor" type="text" id="highlightcolor">
+      </label>
+    </p>
+ </fieldset>
+ <fieldset>
+    <legend>Hyperlink properties</legend>
+    <p> 
+            <label>Color (e.g. #0000FF or blue): 
+            <input name="hyperlinkcolor" type="text" id="hyperlinkcolor">
+      </label>
+    </p>
+    <p> 
+      <label>Suggested URLs (one per line):<br>
+      <textarea name="suggurls" cols="65" rows="3" wrap id="suggurls"></textarea>
+      </label>
+    </p>
+ </fieldset>
+    <fieldset>
+    <legend>Image Properties</legend>
+    <p> 
+      <label>Base URL for images: 
+      <input name="baseurl" type="text" id="baseurl" size="50">
+      </label>
+    </p>
+    </fieldset>
+    <h2>Special Features</h2>
+    <fieldset> 
+      <legend>Supply an Image List</legend>
+    <p>
+      <label>Image List URL:<br>
+      <input name="imglisturl" type="text" id="imglisturl" size="50">
+      </label>
+    </p>
+    </fieldset>
+    <h2>Generate Code</h2>
+    <p> 
+      <input name="generate" type="button" id="generate" value="Generate Code Now" onclick="generateCode()">
+    </p>
+    <fieldset id="libcodediv" style="display:none;">
+    <legend>Load <em>Editize</em> Library</legend>
+    <p> 
+      <label>The following ASP.NET code should appear at the top of any Web Form 
+      that contains a form with one or more <em>Editize</em> fields in it:<br>
+      <input name="librarycode" type="text" id="librarycode" readonly="true" value="&lt;%@ Register TagPrefix=&quot;SitePoint&quot; Namespace=&quot;EditizeDotNet&quot; Assembly=&quot;EditizeDotNet&quot; %&gt;" size="65">
+      </label>
+    </p>
+    </fieldset>
+    <fieldset id="fieldcodediv" style="display:none;">
+    <legend><em>Editize</em> field code</legend>
+    <p> 
+      <label>This tag, which should appear within a <code>&lt;form runat=&quot;server&quot;&gt;</code> 
+      tag, should be placed where you would normally put a <code>&lt;textarea&gt;</code> 
+      or <code>&lt;asp:textbox&gt;</code> tag. The code will display an <em>Editize</em> 
+      field configured as you have specified above.<br>
+      <textarea name="fieldcode" cols="65" rows="10" wrap="off" id="fieldcode" readonly="true">
+</textarea>
+      </label>
+    </p>
+    </fieldset>
+
+  </form>
+  <p>&nbsp;</p>
+<div id="footer">
+    <p><a href="index.html">Getting Started</a> | <a href="codegen.html">Code 
+      Generator </a> | <a href="reference.html">API Reference</a></p>
+  </div>
+</div>
+</body>
+</html>

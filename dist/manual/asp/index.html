@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) API for ASP</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+<link href="../styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="top"><img src="../images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <a href="../index.html" class="tab">General</a> <span class="tab this">ASP</span> 
+  <a href="../aspdotnet/index.html" class="tab">ASP.NET</a> <a href="../javascript/index.html" class="tab">JavaScript</a> 
+  <a href="../php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Getting Started</a><img src="../images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="codegen.html">Code Generator</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="reference.html">API Reference</a><img src="../images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="../troubleshooting.html">Troubleshooting</a><img src="../images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center">
+  <h1>The Editize&#8482; API for ASP</h1>
+  <p> This section of the manual explains in detail how to add an <em>Editize</em> 
+    field to a form on an ASP-equipped Web site.</p>
+  <blockquote>
+    <p><strong>Upgrading?</strong><br>
+    For information on updating an existing <em>Editize</em> installation to a new release, <a href="#upgrade">see below</a>.</p>
+  </blockquote>
+  <p>Before integrating <em>Editize </em>into your Content Management System (CMS), 
+    you should first install it on your Web server and try out one or more of 
+    the sample scripts. Once you have verified that the samples work, you can 
+    proceed to use <em>Editize</em> anywhere you like on your site.</p>
+  <h2>Step 1: Put the <em>Editize</em> files on your server</h2>
+  <p>Your first step should be to copy or upload the contents of the <code>asp</code> 
+    folder of the <em>Editize </em>distribution to a folder on your Web server. 
+    If you use your own computer as a Web server for development purposes, copy 
+    the files in the <code>asp</code> folder to a folder in your Web root.</p>
+  <blockquote> 
+    <p><strong>Example 1: Uploading to your Web Host</strong><br>
+      If your Web site is hosted by a Web hosting company, use your FTP program 
+      (or whatever method you normally use to place files on your Web site) to 
+      create a folder called <code>editize</code> in the root of your site. A 
+      file in this directory should be accessible with a URL such as <code>http://www.yoursite.com/editize/filename</code>. 
+      Upload all of the files in the <code>asp</code> folder of the <em>Editize</em> 
+      distributon to this new folder on your Website.</p>
+    <p><strong>Example 2: Installing on your local test server<br>
+      </strong> If you use Microsoft Internet Information Server (IIS) as a Web 
+      server on your Windows computer, the Web root folder is <code>C:\Inetpub\wwwroot</code> 
+      by default. If you use Apache, the Web root folder is <code>C:\Apache\htdocs</code> 
+      by default. Crate a new folder called <code>editize</code> in your Web root 
+      folder. Copy all of the files in the <code>asp</code> folder of the <em>Editize</em> 
+      distribution to this new folder on your Website.</p>
+  </blockquote>
+  <p>The folder where you place the <em>Editize</em> files on your server must 
+    not be password protected. None of these files is a security risk, so you 
+    don't need to worry about them being publically accessible.</p>
+  <p>Here's a list of the files in the <code>asp</code> folder with an explanation 
+    of what each one does:</p>
+  <table border="0" cellspacing="0" id="filelist">
+    <tr> 
+      <td nowrap><code>editize.jar</code></td>
+      <td>The <em>Editize</em> Java library file. This contains the <em>Editize 
+        </em>applet.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>editize.wsc</code></td>
+      <td>The <em>Editize</em> API for ASP. This Windows Script Component will 
+        generate the HTML and JavaScript code neccessary to display the <em>Editize</em> 
+        applet on almost any browser or operating system.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>kunststoff.jar</code></td>
+      <td>The Kunststoff Look &amp; Feel. Improves the look of the <em>Editize 
+        </em>user interface dramatically, but adds 43KB of Java files for users' 
+        browsers to download the first time they visit your site. If you delete 
+        this file, <em>Editize</em> will simply run without any visual enhancements, and 
+        will load quicker over slow modem connections.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>osx.html</code></td>
+      <td>A small Web page containing JavaScript that <em>Editize</em> uses automatically to behave like a form field on Internet Explorer for Mac OS X.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>Default.asp</code><sup>*</sup></td>
+      <td>A sample ASP script written in VBScript that demonstrates how to create 
+        <em>Editize</em> form fields compatible with most browsers.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>Default-jscript.asp</code><sup>*</sup></td>
+      <td>A sample ASP script written in JScript that demonstrates how to create 
+        <em>Editize</em> form fields compatible with most browsers.</td>
+    </tr>
+  </table>
+  <p class="note">* Files marked with an asterix are sample scripts only, and 
+    are not required for <em>Editize </em>to function on your server.</p>
+  <p>See the next section to discover the meaning of the file called <code>PLACE 
+    YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code>.</p>
+  <h2>Step 2: Put your <em>Editize</em> license file on your server</h2>
+  <p>If you are installing <em>Editize </em>on your own machine for local testing 
+    (i.e. the site you are working on will be accessible as <code>http://localhost/...</code> 
+    or <code>http://127.0.0.1/...</code>), you do not need a license file and 
+    can skip this step.</p>
+  <p>In most cases, however, you'll want to deploy <em>Editize</em> on a server 
+    that is accessible to other people. To do this, you will require an <em>Editize</em> 
+    license file. You can get a free trial license file from the <em><a href="http://www.editize.com/">Editize</a></em><a href="http://www.editize.com/"> 
+    Web site</a> (click 'Download' and choose the type of license you need).</p>
+  <p>There are two types of <em>Editize</em> licenses. A <strong>hostname license</strong> 
+    lets you use <em>Editize</em> on a Web site with a particular hostname (e.g. 
+    mysite.com). If your Web site is accessible with more than one hostname, (e.g. 
+    admin.mysite.com and mysite.com), you will need a license file for each hostname. 
+    In most cases, <em>Editize</em> <a href="http://editize.com/support.php">Customer 
+    Support</a> will be happy to issue you with additional hostname licenses for 
+    use on a single Web site at no extra charge.</p>
+  <p>A <strong>private network IP license</strong> lets you use <em>Editize</em> 
+    on a Web server within a private network. This is useful for Intranets and 
+    home networks where servers may not neccessarily have hostnames or even fixed 
+    IP addresses. In most cases, <em>Editize</em> customer support will be happy 
+    to issue you with a temporary private network IP license for a test server 
+    while you are developing a site that will eventually be launched on the Internet 
+    with a hostname license.</p>
+  <p>If you have a hostname license, the file will be called <code>editize.<em>hostname</em>.lic</code>. 
+    If you have a private network IP license, the file will instead be called 
+    <code>editize.lic</code>. In either case, copy or upload the file into the 
+    same folder that you created in Step 1 above. There is a file called <code>PLACE 
+    YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code> to remind you to do this, which 
+    you can delete if you like.</p>
+  <h2>Step 3: Try out a sample script</h2>
+  <p>The <em>Editize</em> folder on your server contains a few sample scripts 
+    for you to try out. Each of these scripts contains a form with an <em>Editize</em> 
+    field in it. When you submit the form, the script should display the HTML 
+    document you created in <em>Editize</em>, and allow you to load it back into 
+    the original form to edit further.</p>
+  <p>Open your Web browser and type the URL to load the <code>Default.asp</code> 
+    script in the <em>Editize</em> folder on your Web server into the address 
+    field.</p>
+  <blockquote>
+   <p><strong>Example 1: Running the sample on your Web Host</strong><br>
+      If your Web site is hosted by a Web hosting company, the <em>Editize</em> 
+      files should now be in a folder in the root of your Web site (e.g. <code>http://www.yoursite.com/editize/</code>). 
+      To load the <code>Default.asp</code> sample script, type <code>http://www.yoursite.com/editize/Default.asp</code> 
+      into your browser's address field.</p>
+  <p>
+    <strong>Example 2: Running the sample on your local test server</strong><br>
+      If you've placed the <em>Editize</em> files in a folder on your local test 
+      server, you should be able to run the <code>Default.asp</code> test script 
+      by simply typing <code>http://localhost/editize/Default.asp</code> into 
+      your browser's address field.</p>
+  </blockquote>
+  <p>Have a play with the sample form, submit a document, and then re-open it 
+    for editing. If you run into any problems, see the <a href="../troubleshooting.html">Troubleshooting</a> 
+    section of this manual. Otherwise, you're good to go!</p>
+  <h2><a name="registercomponent"></a>Step 4: (Optional) Register the <em>Editize</em> 
+    Component on your Server</h2>
+  <p>To slightly simplify the code in your ASP pages and improve performance of 
+    the <em>Editize </em>API for ASP, you can register the Windows Script Component 
+    on your server. You can only do this if you have direct access to the server, 
+    or if your Web host is willing to do it for you.</p>
+  <p>Complete the following steps (or ask your Web host to complete them for you) 
+    to register the Windows Script Component in Windows on your Web server:</p>
+  <ol>
+    <li>Copy the <code>editize.wsc</code> file (found in the <code>asp</code> 
+      directory of this distribution) to a convenient folder on the server computer. 
+      The <code>SYSTEM32</code> subfolder of the Windows folder (e.g. <code>C:\WINNT\SYSTEM32</code>) 
+      is a common choice, but you can put it elsewhere if you prefer. <em>Please 
+      note: the file may not reside on a network drive.</em></li>
+    <li>Right-click on the file in its new location and choose Register from the 
+      pop-up menu.</li>
+    <li>A message box should be displayed confirming that registration was successful. 
+      <p align="center"><img src="../images/asp-registered.gif" width="441" height="119"> 
+      </p>
+    </li>
+  </ol>
+  <p>The <em>Editize </em>API for ASP is now registered as a Windows Script Component 
+    on your server computer. Should you wish to unregister it at a later date, 
+    simply right-click the file and choose Unregister, and then delete the <code>editize.wsc</code> 
+    file.</p>
+  <p>If you have any trouble registering the component, please refer to the <a href="../troubleshooting.html">Troubleshooting</a> 
+    section of this manual.</p>
+  <h2>Step 5: Integrate <em>Editize</em> into your own scripts</h2>
+  <p>You can now add <em>Editize</em> fields to any form on your site.</p>
+  <h3> Basic Syntax</h3>
+  <p>As mentioned above, <em>Editize</em> is designed as a drop-in replacement 
+    for the HTML &lt;textarea&gt; tag. We will therefore explain how to use it 
+    by comparing it with that tag.</p>
+  <p>Here is a typical HTML form containing a &lt;textarea&gt; tag:</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+<span class="tag">  &lt;</span><span class="tagname">textarea</span><span class="tag"> </span><span class="attributename">name</span><span class="tag">=&quot;example&quot;&gt;</span>
+  This is the document that the textarea will contain initially.
+<span class="tag">  &lt;/</span><span class="tagname">textarea</span><span class="tag">&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>The ASP API for <em>Editize</em> is designed so that you can simply replace 
+    the <code>&lt;textarea&gt;</code> tag with some brief code to put an <em>Editize</em> 
+    field in its place.</p>
+  <p>To quickly obtain the code to add an <em>Editize</em> to a form in your Web 
+    site, use the <a href="codegen.html">Code Generator</a> to generate it automatically. 
+    Alternatively, read on to learn how to write the code yourself.</p>
+  <p>Here is an example of the simplest means to invoke <em>Editize</em> as a 
+    form field:</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+  <span class="tag">&lt;%
+    Dim </span><span class="tagname">ed</span><span class="tag">
+    Set </span><span class="tagname">ed</span><span class="tag"> = Server.</span><span class="attributename">CreateObject</span><span class="tag">(&quot;Editize.aspapi&quot;)
+    </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">name</span><span class="tag"> = &quot;example&quot;
+    Response.</span><span class="attributename">Write</span><span class="tag"> </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">DisplayContent</span><span class="tag">(&quot;&lt;p align=&quot;&quot;center&quot;&quot;&gt;This is the document that Editize will edit.&lt;/p&gt;&quot;)
+  %&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>The <code>Server.CreateObject</code> line in the above will only work if 
+    the Editize Windows Script Component is registered on your Web server (see 
+    <a href="#registercomponent">Component Registration</a> above). If you are 
+    unable or unwilling to register the component, you can use the following slightly 
+    less efficient syntax:</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+  <span class="tag">&lt;%
+    Dim </span><span class="tagname">ed</span><span class="tag">
+    Set </span><span class="tagname">ed</span><span class="tag"> = </span><span class="attributename">GetObject</span><span class="tag">(&quot;script:&quot; &amp; Server.</span><span class="attributename">MapPath</span><span class="tag">(&quot;editize.wsc&quot;))
+</span>    <span class="tagname">ed</span><span class="tag">.</span><span class="attributename">name</span><span class="tag"> = &quot;example&quot;
+    Response.</span><span class="attributename">Write</span><span class="tag"> </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">DisplayContent</span><span class="tag">(&quot;&lt;p align=&quot;&quot;center&quot;&quot;&gt;This is the document that Editize will edit.&lt;/p&gt;&quot;)
+  %&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>Similarly, in an ASP page set to use JScript as the scripting language:</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+  <span class="tag">&lt;%
+</span><span class="tag">    var </span><span class="tagname">ed</span><span class="tag"> = Server.</span><span class="attributename">CreateObject</span><span class="tag">(&quot;Editize.aspapi&quot;);
+    </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">name</span><span class="tag"> = &quot;example&quot;;
+    Response.</span><span class="attributename">Write</span><span class="tag">(</span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">DisplayContent</span><span class="tag">(&quot;&lt;p align=\&quot;center\&quot;&gt;This is the document that Editize will edit.&lt;/p&gt;&quot;));
+  %&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>Or with an unregistered component file:</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+  <span class="tag">&lt;%
+</span><span class="tag">    var </span><span class="tagname">ed</span><span class="tag"> = </span><span class="attributename">GetObject</span><span class="tag">(&quot;script:&quot; + Server.</span><span class="attributename">MapPath</span><span class="tag">(&quot;editize.wsc&quot;));
+</span>    <span class="tagname">ed</span><span class="tag">.</span><span class="attributename">name</span><span class="tag"> = &quot;example&quot;;
+    Response.</span><span class="attributename">Write</span><span class="tag">(</span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">DisplayContent</span><span class="tag">(&quot;&lt;p align=\&quot;center\&quot;&gt;This is the document that Editize will edit.&lt;/p&gt;&quot;));
+  %&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>The meaning of the 4 lines of VBScript (or 3 lines of JScript) should be 
+    fairly apparent to experienced ASP developers. The first line or two creates 
+    an <code>Editize.aspapi </code>object, which will do all the work of generating 
+    the HTML and JavaScript code to display the <em>Editize </em>applet as a form 
+    field.</p>
+  <p>The next line sets the <code>name</code> property of the object, which is 
+    equivalent to the <code>name </code>attribute of a <code>&lt;textarea&gt;</code> 
+    tag. You should always specify a field name in this way when you use <em>Editize</em>, 
+    although if you don't a default of <code>editize</code> will be used.</p>
+  <p>Finally, the last line displays the <em>Editize</em> field; that is, it 
+    outputs all of the HTML and JavaScript code to place the <em>Editize</em> 
+    field in the page at that point. In this example, we have passed the initial 
+    document to be displayed (the equivalent of the contents of the <code>&lt;textarea&gt;</code> 
+    tag) to the <code>DisplayContent </code>method. Alternatively, the <code>Display 
+    </code>method, which takes no arguments, can be used to display <em>Editize</em> 
+    with a blank document.</p>
+  <h3>Configuration Attributes</h3>
+  <p>The <em>Editize</em> applet is very configurable. You can customize the formatting 
+    applied by the various styles and tools available, and even specify that certain 
+    features should be disabled entirely if they are not appropriate for your 
+    environment.</p>
+  <p>By default, the <em>Editize</em> API for ASP enables all of <em>Editize</em>'s 
+    formatting tools with default format settings. This section demonstrates how 
+    to use the properties supported by the <em>Editize</em> API for ASP to modify 
+    these defaults.</p>
+<p>To set the values of properties, simply specify them as you did for the <code>name 
+    </code>attribute in the simple example above. For instance, to create an <em>Editize</em> 
+    field with a base font of 12-pixel Verdana, you would use the following VBScript 
+    code (or the equivalent JScript):</p>
+  <pre>&lt;form action=&quot;...&quot; method=&quot;post&quot;&gt;
+  <span class="tag">&lt;%
+    Dim </span><span class="tagname">ed</span><span class="tag">
+    Set </span><span class="tagname">ed</span><span class="tag"> = Server.</span><span class="attributename">CreateObject</span><span class="tag">(&quot;Editize.aspapi&quot;)
+    </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">name</span><span class="tag"> = &quot;example&quot;
+    </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">basefontface</span><span class="tag"> = &quot;Verdana&quot; ' SETS THE FONT FACE
+    </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">basefontsize</span><span class="tag"> = 12        ' SETS THE FONT SIZE
+    Response.</span><span class="attributename">Write</span><span class="tag"> </span><span class="tagname">ed</span><span class="tag">.</span><span class="attributename">DisplayContent</span><span class="tag">( &quot;&lt;p align=&quot;&quot;center&quot;&quot;&gt;&quot; &amp; _
+      &quot;This is the document that Editize will edit.&lt;/p&gt;&quot;)
+  ?&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>Note that you have to set all the properties you want before you call the 
+    <code>Display</code> or <code>DisplayContent</code> methods.</p>
+  <p>A list of all supported properties with examples for each is provided in 
+    the <a href="reference.html">Reference</a> section of this manual, or you 
+    can use the <a href="codegen.html">Code Generator</a> to select all the properties 
+    you want from a list and have the code generated for you automatically.</p>
+  <h2>Step 6: (Optional) Providing a List of Images</h2>
+  <p>By default, the Insert Image tool in <em>Editize </em>will prompt the user 
+    for the URL of the image he or she wishes to insert. Since it can be fairly 
+    tedious to hand-type the URL for every image, <em>Editize </em>also provides 
+    a method to specify a list of images that users may quickly choose from.</p>
+  <p>The <code>imglisturl</code> property lets you set a URL from which <em>Editize 
+    </em>will download a list of images to present it to the user in the Insert 
+    Image dialog. The given URL may refer to a server-side script (e.g. to provide 
+    an up-to-date list of images stored in a content management system). If a 
+    static list of images is all that you need, you can simply point <em>Editize</em> 
+    to a text file of the required format residing on your server.</p>
+  <p>The <a href="reference.html#imglisturl">documentation for <code>imglisturl</code></a> 
+    in the <a href="reference.html">Reference</a> section of this manual explains 
+    the required format of the image list. A sample script written in PHP called 
+    <code>imglist.php</code> that produces a list of all the images in a given 
+    directory and its subdirectories is provided in the <code>php</code> folder 
+    of this distribution.</p>
+  <h2>Step 7: (Optional) Improving Browser Compatibility</h2>
+    <p>The following browsers do not support the standard for JavaScript-to-Java communication, upon which <em>Editize</em> relies:</p>
+    
+    <ul>
+      <li>Internet Explorer 5.2 for Mac OS X</li>
+      <li>Opera 6.01+</li>
+      <li>Mozilla 1.x for Mac OS X</li>
+      <li>Netscape 4.x</li>
+    </ul>
+    <p><em>Editize</em> therefore uses an alternative submission method on these browsers. As a side effect, when the form is submitted using an HTML submit button (<code>&lt;input type=&quot;submit&quot;&gt;</code>), that submit button's value is not submitted to the server for processing along with the rest of the form data. </p>
+    <p>To make HTML submit buttons submit correctly in all supported browsers, you must include the following VBScript code immediately after the closing <code>&lt;/form&gt;</code> tag for the form that contains your <em>Editize</em> field(s):</p>
+    <pre class="tag">  &lt;%
+    Response.Write <span class="tagname">ed</span>.<span class="attributename">EndForm</span>()
+  %&gt;</pre>
+    <p>Here's the JScript equivalent:</p>
+    <pre class="tag">  &lt;%
+    Response.Write(<span class="tagname">ed</span>.<span class="attributename">EndForm</span>());
+  %&gt;</pre>
+    <p>The <code>EndForm</code> method of the <em>Editize</em> API shown here outputs some additional HTML and JavaScript code that makes HTML submit buttons work correctly alongside the <em>Editize</em> fields in your form. This code must occur in the page <em>after</em> your form, which is why it must be output separately using this method.</p>
+    <p>On top of this, Netscape 4.x by default is not supported by the <em>Editize</em> API for ASP, as it contains bugs that prevent this alternative submission method from working properly. By default, <em>Editize</em> fields will be displayed as standard <code>&lt;textarea&gt;</code> fields in Netscape 4.x.</p>
+    <p>To run <em>Editize</em> in Netscape 4.x, you need to use the <code>endForm</code> method as described above, and you must additionally set the <code>ns4support</code> property of your <em>Editize</em> field(s) to <code>true</code>:</p>
+    <pre class="tag">    <span class="tagname">ed</span>.<span class="attributename">ns4support</span> = true</pre>
+    <p>Remember, although the call to <code>endForm</code> goes after your closing <code>&lt;/form&gt;</code> tag, you must set the <code>ns4support</code> property along with your other <em>Editize</em> field properties before calling <code>Display</code> or <code>DisplayContent</code>.</p>
+    <p>The <tt>default.asp</tt> and <tt>default-jscript.asp</tt> sample scripts included in the <code>asp</code> folder of this archive use the above techniques to provide maximum browser compatibility.</p>
+    <p>Refer to the documentation for <a href="reference.html#endform"><code>endForm</code></a> and <code><a href="reference.html#ns4support">ns4support</a></code> in the <a href="reference.html">Reference</a> section of this manual for further details.</p>
+    <h2><a name="upgrade" id="upgrade"></a>Upgrading to a New Version</h2>
+    <p>In most cases, all you need to do to upgrade to a new release of <em>Editize</em> is to upload the new versions of <code>editize.jar</code>, <code>editize.wsc</code>, <code>osx.html</code>, and optionally <code>kunststoff.jar</code> over the old versions already on your server. It is very important that you replace all of these files, as changes made to one in a particular release often rely on changes made to another.</p>
+    <p>Occasionally, we add new features to <em>Editize</em>. Very occasionally, we change the way the APIs work. In both of these cases, you may need to make some changes to the page(s) on your site(s) that use Editize to make the new version work the way you expect it to. Always read the <a href="../history.html">Revision History</a> for the new release to find out when such changes are made.</p>
+    <div id="footer">
+    <p><a href="index.html">Getting Started</a> | <a href="codegen.html">Code 
+      Generator </a> | <a href="reference.html">API Reference</a></p>
+  </div>
+</div>
+</body>
+</html>

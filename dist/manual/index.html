@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) Manual</title>
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+</head>
+<body>
+<div id="top"><img src="images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav">
+	<span class="tab this">General</span>
+	<a href="asp/index.html" class="tab">ASP</a>
+	<a href="aspdotnet/index.html" class="tab">ASP.NET</a>
+	<a href="javascript/index.html" class="tab">JavaScript</a>
+	<a href="php/index.html" class="tab">PHP</a>
+</div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Introduction</a><img src="images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="quickstart.html">Quick Start Guide</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="features.html">List of Features</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="troubleshooting.html">Troubleshooting</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="history.html">Revision History</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="license.html">License Agreement</a><img src="images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center">
+  <h1>The Editize&#8482; Manual</h1>
+  <p><em>Editize</em> is designed as a drop-in replacement for the HTML <code>&lt;textarea&gt;</code> 
+    tag to be used in custom-built Web Content Management Systems (CMS). Instead 
+    of plain text, it allows your users to edit richly formatted documents. When 
+    a form is submitted, <em>Editize </em>fields are submitted as simple HTML 
+    documents. Like <code>&lt;textarea&gt;</code> tags,<em> Editize </em>fields 
+    can also be passed an initial document to display when the page loads.</p>
+  <p><img src="images/before-and-after.gif" alt="Editize replaces standard &lt;textarea&gt; tags with an advanced, cross-platform HTML Editor!" width="574" height="202"></p>
+  <p>To quickly get <em>Editize</em> up and running and to learn how to integrate 
+    it into your CMS, jump to the <a href="quickstart.html">Quick Start Guide</a> 
+    section of this manual. Or read on to learn more about the technology behind 
+    <em>Editize</em>.</p>
+  <h2>Technology Overview</h2>
+<p><em>Editize</em> itself is purely client-side, running as a Java applet that 
+  makes use of a little JavaScript to masquerade as a form field. As such, <em>Editize 
+  </em>requires the Sun Java&#8482; Plug-in to be installed on the user's browser 
+  to function. If a page containing <em>Editize</em> is loaded on a system that 
+  does not have the Java&#8482; Plugin installed, the user will be prompted to 
+  install the Plug-in automatically as the page is loaded.</p>
+<p>For the convenience of the developer, the HTML and JavaScript code to insert 
+  <em>Editize </em>in a page is generated automatically by a server-side script. 
+  At present, <em>Editize </em>comes with code generation components (APIs) for 
+  the following languages:</p>
+<ul>
+  <li>ASP</li>
+  <li>ASP.NET</li>
+  <li>JavaScript</li>
+  <li>PHP</li>
+</ul>
+<p>Other server-side platforms (JSP, ColdFusion, Perl, etc.) will be supported 
+  in future as customer demand warrants (<a href="http://editize.com/support.php">let us know what you need!</a>). In the meantime, the JavaScript API is provided for users that don't 
+  have scripting facilities on their server, or don't have access to one of the 
+  supported server-side languages.</p>
+  <h2>Browser Compatibility</h2>
+  <p><em>Editize </em>works best with Internet Explorer 4+ for Windows, Netscape 6+, Mozilla 
+    browsers (including Firefox), or Opera 6.01+. <em>Editize</em> is also compatible with Safari, Internet Explorer 5.2, and Mozilla browsers on Mac OS X 10.1 or later.</p>
+  <p><em>Editize </em>also supports Netscape 4.x, but requires that you include a little extra code at the end of your form to overcome a number of bugs in this aging browser. Instructions on what you need to do are provided for each of the APIs later in this manual.</p>
+  <h2>Copyrights</h2>
+<p><em>Editize</em> and <em>SitePoint </em>are trademarks of SitePoint Pty Ltd.</p>
+  <p><em>Java </em>is a trademark of Sun Microsystems Ltd.</p>
+  <p>This document and associated files are Copyright &copy; 2002-2004, SitePoint Pty 
+    Ltd.</p>
+  <div id="footer">
+    <p><a href="index.html">Introduction</a> | <a href="quickstart.html">Quick 
+      Start Guide</a> | <a href="features.html">List of Features</a> | <a href="history.html">Revision 
+      History</a> | <a href="license.html">License Agreement</a></p>
+  </div>
+</div>
+</body>
+</html>

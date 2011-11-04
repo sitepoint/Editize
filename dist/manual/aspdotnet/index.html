@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) API for ASP.NET</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+<link href="../styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="top"><img src="../images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <a href="../index.html" class="tab">General</a> <a href="../asp/index.html" class="tab">ASP</a> 
+  <span class="tab this">ASP.NET</span> <a href="../javascript/index.html" class="tab">JavaScript</a> 
+  <a href="../php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Getting Started</a><img src="../images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="codegen.html">Code Generator</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="reference.html">API Reference</a><img src="../images/x.gif" width="15" height="9" border="0">
+    <hr noshade align="right" />
+    <a href="../troubleshooting.html">Troubleshooting</a><img src="../images/x.gif" width="15" height="9" border="0"> 
+  </div>
+</div>
+
+<div id="center">
+<h1>The Editize&#8482; API for ASP.NET</h1>
+  <p> This section of the manual explains in detail how to add an <em>Editize</em> 
+    field to a form on an ASP.NET-equipped Web site.</p>
+  <blockquote>
+    <p><strong>Upgrading?</strong><br>
+    For information on updating an existing <em>Editize</em> installation to a new release, <a href="#upgrade">see below</a>.</p>
+  </blockquote>
+  <p>Before integrating <em>Editize </em>into your Content Management System (CMS), 
+    you should first install it on your Web server and try out one or more of 
+    the sample scripts. Once you have verified that the samples work, you can 
+    proceed to use <em>Editize</em> anywhere you like on your site.</p>
+  <h2>Step 1: Put the <em>Editize</em> files on your server</h2>
+  <p>Your first step should be to copy or upload the contents of the <code>aspdotnet</code> 
+    folder of the <em>Editize </em>distribution to a folder on your Web server. 
+    If you use your own computer as a Web server for development purposes, copy 
+    the files in the <code>aspdotnet</code> folder to a folder in your Web root.</p>
+  <blockquote> 
+    <p><strong>Example 1: Uploading to your Web Host</strong><br>
+      If your Web site is hosted by a Web hosting company, use your FTP program 
+      (or whatever method you normally use to place files on your Web site) to 
+      create a folder called <code>editize</code> in the root of your site. A 
+      file in this directory should be accessible with a URL such as <code>http://www.yoursite.com/editize/filename</code>. 
+      Upload all of the files in the <code>aspdotnet</code> folder of the <em>Editize</em> 
+      distributon to this new folder on your Website.</p>
+    <p><strong>Example 2: Installing on your local test server<br>
+      </strong> If you use Microsoft Internet Information Server (IIS) as a Web 
+      server on your Windows computer, the Web root folder is <code>C:\Inetpub\wwwroot</code> 
+      by default. If you use Apache, the Web root folder is <code>C:\Apache\htdocs</code> 
+      by default. Crate a new folder called <code>editize</code> in your Web root 
+      folder. Copy all of the files in the <code>aspdotnet</code> folder of the 
+      <em>Editize</em> distribution to this new folder on your Website.</p>
+  </blockquote>
+  <p>The folder where you place the <em>Editize</em> files on your server must 
+    not be password protected. None of these files is a security risk, so you 
+    don't need to worry about them being publically accessible.</p>
+  <p>Here's a list of the files in the <code>aspdotnet</code> folder with an explanation 
+    of what each one does:</p>
+  <table border="0" cellspacing="0" id="filelist">
+    <tr> 
+      <td nowrap><code>editize.jar</code></td>
+      <td>The <em>Editize</em> Java library file. This contains the <em>Editize 
+        </em>applet.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>bin/EditizeDotNet.dll</code></td>
+      <td>The <em>Editize</em> API for ASP.NET. This .NET assembly contains two 
+        ASP.NET Server Controls that will generate the HTML and JavaScript code 
+        neccessary to display the <em>Editize</em> applet on almost any browser 
+        or operating system.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>kunststoff.jar</code></td>
+      <td>The Kunststoff Look &amp; Feel. Improves the look of the <em>Editize 
+        </em>user interface dramatically, but adds 43KB of Java files for users' 
+        browsers to download the first time they visit your site. If you delete 
+        this file, <em>Editize</em> will simply run without any visual enhancements, and 
+        will load quicker over slow modem connections.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>osx.html</code></td>
+      <td>A small Web page containing JavaScript that allows <em>Editize</em> 
+        to behave like a form field on Internet Explorer for Mac OS X.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>Default.aspx</code><sup>*</sup></td>
+      <td>A sample ASP.NET Web Form written in VB.NET that demonstrates how to 
+        create <em>Editize</em> form fields compatible with most browsers.</td>
+    </tr>
+    <tr> 
+      <td nowrap><code>Default-csharp.aspx</code><sup>*</sup></td>
+      <td>A sample ASP.NET Web Form written in C# that demonstrates how to create 
+        <em>Editize</em> form fields compatible with most browsers.</td>
+    </tr>
+  </table>
+  <p class="note">* Files marked with an asterix are sample scripts only, and 
+    are not required for <em>Editize </em>to function on your server.</p>
+  <p>See the next section to discover the meaning of the file called <code>PLACE 
+    YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code>.</p>
+  <h2>Step 2: Put your <em>Editize</em> license file on your server</h2>
+  <p>If you are installing <em>Editize </em>on your own machine for local testing (i.e. the site you are working on will be accessible as <code>http://localhost/...</code> or <code>http://127.0.0.1/...</code>), you do not need a license file and can skip this step.</p>
+  <p>In most cases, however, you'll want to deploy <em>Editize</em> on a server that is accessible to other people. To do this, you will require an <em>Editize</em> license file. You can get a free trial license file from the <em><a href="http://www.editize.com/">Editize</a></em><a href="http://www.editize.com/"> Web site</a> (click 'Download' and choose the type of license you need).</p>
+  <p>There are three types of <em>Editize</em> licenses. A <strong>hostname license</strong> lets you use <em>Editize</em> on a Web site with a particular hostname (e.g. mysite.com). If your Web site is accessible with more than one hostname, (e.g. admin.mysite.com and mysite.com), you will need a license file for each hostname. The majority of trial licenses we issue are hostname licenses. </p>
+  <p>A <strong>domain license</strong> lets you use <em>Editize</em> on all Web sites within a particular domain (e.g. mydomain.com). With a domain license, you don't need additional licenses to use <em>Editize</em> on subdomains (e.g. admin.mydomain.com). When you buy <em>Editize</em>, you'll get a domain license for the domain of your choice. </p>
+  <p>A <strong>private network IP license</strong> lets you use <em>Editize</em> on a Web server within a private network. This is useful for Intranets and home networks where servers may not neccessarily have hostnames or even fixed IP addresses. In most cases, <em>Editize</em> customer support will be happy to issue you with a temporary private network IP license for a test server while you are developing a site that will eventually be launched on the Internet with a hostname license.</p>
+  <p>In most cases, <em>Editize</em> <a href="http://editize.com/support.php">Customer Support</a> will be happy to issue you with additional licenses if you need them at no extra charge, so long as they are only used to run <em>Editize</em> on a site for which you have already bought a license. Feel free to contact us if you have any questions about licensing <em>Editize</em> for your needs.</p>
+  <p>If you have a hostname or domain license, the file will be called <code>editize.<em>hostname</em>.lic</code>. If you have a private network IP license, the file will instead be called <code>editize.lic</code>. In either case, copy or upload the file into the same folder that you created in Step 1 above. There is a file called <code>PLACE YOUR LICENSE FILE IN THIS DIRECTORY.TXT</code> to remind you to do this, which you can delete if you like.</p>
+  <h2>Step 3: Create a Web Application for the <em>Editize</em> samples</h2>
+  <p>ASP.NET looks for assemblies such as <code>EditizeDotNet.dll</code> in 
+    a <code>bin</code> folder in the root of the current Web application. For 
+    the <em>Editize</em> sample scripts to be able to find the <em>Editize</em> 
+    API for ASP.NET on your server, the folder you created on your site in Step 
+    1 must be set as the root of a Web application.</p>
+  <p>The following steps will walk you through the process of setting up your 
+    new <code>editize</code> folder as the root of a new Web application:</p>
+  <ol>
+    <li>On the server, open the Windows <em>Control Panel</em>.</li>
+    <li>Open the <em>Administrative Tools</em> folder.</li>
+    <li>Open the <em>Internet Information Services</em> console.</li>
+    <li>Expand the tree on the left to find the Web site that contains your new 
+      <code>editize</code> folder under <em>Web Sites</em>. Unless your server 
+      hosts multiple sites, it should be called <em>Default Web Site</em>.</li>
+    <li>Under <em>Default Website</em>, locate and select the <code>editize</code> 
+      folder you created in Step 1 above.</li>
+    <li>Right-click the folder and choose <em>Properties</em> from the pop-up 
+      menu.</li>
+    <li>In the properties window that opens, the <em>Application name</em> field 
+      is disabled to indicate that this folder is not the root of a Web application.<br>
+      <img src="../images/aspnet-nowebapp.gif" width="461" height="440" hspace="5" vspace="5"></li>
+    <li>Click the <em>Create</em> button next to the <em>Application name</em> 
+      field to create a new Web application rooted in this folder. The <em>Application 
+      name</em> field becomes enabled and the name of the folder becomes the name 
+      of the new Web Application.<br>
+      <img src="../images/aspnet-webapp.gif" width="461" height="440" hspace="5" vspace="5"></li>
+    <li>Click OK. Back in the Internet Information Services console, you should 
+      notice that the folder in question now has a special Web Application icon, 
+      instead of the plain folder icon it displayed previously.<br>
+      <img src="../images/aspnet-webapp2.gif" width="152" height="160" hspace="5" vspace="5"> 
+    </li>
+  </ol>
+  <p>The <code>editize</code> folder on your server is now the root of a Web Application. 
+    Any ASP.NET scripts in this folder (or any of its subfolders) will be able 
+    to find the <code>EditizeDotNet.dll</code> file in the <code>bin</code> subfolder 
+    of the <code>editize</code> folder.</p>
+  <p><strong>Note:</strong> If you later want to use the Editize API for ASP.NET 
+    to add Editize fields to Web Forms elsewhere on your Web site, you will have 
+    to copy the <code>EditizeDotNet.dll</code> file to the <code>bin</code> directory 
+    of the Web Application to which those Web Forms belong.</p>
+  <h2>Step 4: Try out a sample script</h2>
+  <p>The <em>Editize</em> folder on your server contains a few sample scripts 
+    for you to try out. Each of these scripts contains a form with an <em>Editize</em> 
+    field in it. When you submit the form, the script should display the HTML 
+    document you created in <em>Editize</em>, and allow you to load it back into 
+    the original form to edit further.</p>
+  <p>Open your Web browser and type the URL to load the <code>Default.aspx</code> 
+    script in the <em>Editize</em> folder on your Web server into the address 
+    field.</p>
+  <blockquote> 
+    <p><strong>Example 1: Running the sample on your Web Host</strong><br>
+      If your Web site is hosted by a Web hosting company, the <em>Editize</em> 
+      files should now be in a folder in the root of your Web site (e.g. <code>http://www.yoursite.com/editize/</code>). 
+      To load the <code>Default.aspx</code> sample script, type <code>http://www.yoursite.com/editize/Default.aspx</code> 
+      into your browser's address field.</p>
+    <p> <strong>Example 2: Running the sample on your local test server</strong><br>
+      If you've placed the <em>Editize</em> files in a folder on your local test 
+      server, you should be able to run the <code>Default.aspx</code> test script 
+      by simply typing <code>http://localhost/editize/Default.aspx</code> into 
+      your browser's address field.</p>
+  </blockquote>
+  <p>Have a play with the sample form, submit a document, and then re-open it 
+    for editing. If you run into any problems first make sure you've followed 
+    the instructions in Step 3 above. If the problem persist, see the <a href="../troubleshooting.html">Troubleshooting</a> 
+    section of this manual. Otherwise, you're good to go!</p>
+  <h2>Step 5: Integrate <em>Editize</em> into your own Web Forms</h2>
+  <p>If you use Visual Studio .NET to build your ASP.NET Web sites, you can skip 
+    this section and read <a href="#vsdotnet">Using Editize in Visual Studio .NET</a> 
+    instead.</p>
+  <p>Add the following code to the top of any ASP.NET page to load the <em>Editize 
+    </em>ASP.NET Server Control:</p>
+  <p> <code class="tag">&lt;%@ <span class="tagname">Register</span> <span class="attributename">TagPrefix</span>=&quot;SitePoint&quot; 
+    <span class="attributename">Namespace</span>=&quot;EditizeDotNet&quot; <span class="attributename">Assembly</span>=&quot;EditizeDotNet&quot; 
+    %&gt;</code></p>
+  <p>Feel free to use a different <code>TagPrefix</code> value if you like (see 
+    the documentation for ASP.NET to learn more about tag prefixes), but the <code>NameSpace</code> 
+    value must be <code>&quot;EditizeDotNet&quot;</code> and the <code>Assembly</code> 
+    value must match the name of the <code>.dll</code> file you placed in the 
+    <code>bin</code> directory (also <code>&quot;EditizeDotNet&quot;</code>) of 
+    the page's Web application.</p>
+  <p>You can now use the <em>Editize</em> ASP.NET Server Control in any form in 
+    this page.</p>
+  <h3>Basic Syntax</h3>
+  <p>As mentioned above, <em>Editize</em> is designed as a drop-in replacement for 
+    the HTML &lt;textarea&gt; tag. We will therefore explain how to use it by 
+    comparing it with that tag.</p>
+  <p>Here is a typical ASP.NET form containing a &lt;textarea&gt; tag:</p>
+  <pre>&lt;form method=&quot;post&quot; runat=&quot;server&quot;&gt;
+<span class="tag">  &lt;</span><span class="tagname">textarea</span><span class="tag"> </span><span class="attributename">name</span><span class="tag">=&quot;example&quot;&gt;</span>
+  This is the document that the textarea will contain initially.
+<span class="tag">  &lt;/</span><span class="tagname">textarea</span><span class="tag">&gt;
+</span>  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;</pre>
+  <p>The ASP API for <em>Editize</em> is designed so that you can simply replace 
+    the <code>&lt;textarea&gt;</code> tag with an ASP.NET tag to put an <em>Editize</em> 
+    field in its place.</p>
+  <p>To quickly obtain the code to add an <em>Editize</em> to a form in your Web 
+    site, use the <a href="codegen.html">Code Generator</a> to generate it automatically. 
+    Alternatively, read on to learn how to write the code yourself.</p>
+  <p>Here is an example of the simplest means to invoke <em>Editize</em> as a 
+    form field:</p>
+  <pre class="tag">&lt;<span class="tagname">form</span> <span class="attributename">method</span>=&quot;post&quot; <span class="attributename">runat</span>=&quot;server&quot;&gt;
+  &lt;<span class="tagname">SitePoint:Editize</span> <span class="attributename">runat</span>=&quot;server&quot; <span class="attributename">id</span>=&quot;example&quot;
+    <span class="attributename">content</span>=&quot;&amp;lt;p align=&amp;quot;center&amp;quot;&amp;gt;This is the document that Editize will edit.&amp;lt;/p&amp;gt;&quot;&gt;
+  &lt;/<span class="tagname">SitePoint:Editize</span>&gt;
+  &lt;<span class="tagname">input</span> <span class="attributename">type</span>=&quot;submit&quot; <span class="attributename">value</span>=&quot;Submit&quot; /&gt;
+&lt;/<span class="tagname">form</span>&gt;</pre>
+<p>Experienced ASP.NET developers should recognize this immediately. We have used 
+  a special tag named <code>&lt;SitePoint:Editize&gt;</code> (where you replace 
+  <code>SitePoint</code> with the <code>TagPrefix</code> you specified at the 
+  top of the page, if you chose to use something different). This tag is translated 
+  by ASP.NET into the HTML and JavaScript code that is neccessary to display an 
+  <em>Editize</em> field as part of your form.</p>
+<p>The attributes of the tag configure the behavior and appearance of the <em>Editize 
+  </em>field. The <code>runat=&quot;server&quot;</code> attribute is required 
+  by all ASP.NET Server Controls, so it should always be there. The <code>id=&quot;example&quot;</code> 
+  attribute serves to uniquely identify this tag in your page. If you're not terribly 
+  familiar with ASP.NET, think of it as the equivalent of the <code>&lt;textarea&gt;</code> 
+  tag's <code>name</code> attribute.</p>
+  <p>Finally, the <code>content</code> attribute specifies the initial contents 
+    of the field to be displayed when the page is first loaded. As you can see, 
+    this is a simple fragment of HTML. Since this value is specified as an attribute, 
+    the special HTML characters (<code>&lt; &gt; &quot;</code>) must be translated 
+    into their respective HTML character entities (<code>&amp;lt; &amp;gt; &amp;quot;</code>).</p>
+  <h3>Configuration Attributes</h3>
+  <p>The <em>Editize</em> applet is very configurable. You can customize the formatting 
+    applied by the various styles and tools available, and even specify that certain 
+    features should be disabled entirely if they are not appropriate for your 
+    environment.</p>
+  <p>By default, the <em>Editize</em> ASP.NET Server Control enables all of <em>Editize</em>'s 
+    formatting tools with default format settings. This section demonstrates how 
+    to use the properties supported by the <em>Editize </em>API for ASP.NET to 
+    modify these defaults.</p>
+  <p>To set the values of properties, simply specify them as you did the other 
+    attributes in the simple example above. For instance, to create an <em>Editize</em> 
+    field with a base font of 12-pixel Verdana, you would use the following ASP.NET 
+    code:</p>
+  <pre class="tag">&lt;<span class="tagname">form</span> <span class="attributename">method</span>=&quot;post&quot; <span class="attributename">runat</span>=&quot;server&quot;&gt;
+  &lt;<span class="tagname">SitePoint:Editize</span> <span class="attributename">runat</span>=&quot;server&quot; <span class="attributename">id</span>=&quot;example&quot;
+    <span class="attributename">basefontface</span>=&quot;Verdana&quot; <span class="attributename">basefontsize</span>=&quot;12&quot;
+    <span class="attributename">content</span>=&quot;&amp;lt;p align=&amp;quot;center&amp;quot;&amp;gt;This is the document that Editize will edit.&amp;lt;/p&amp;gt;&quot;&gt;
+  &lt;/<span class="tagname">SitePoint:Editize</span>&gt;
+  &lt;<span class="tagname">input</span> <span class="attributename">type</span>=&quot;submit&quot; <span class="attributename">value</span>=&quot;Submit&quot; /&gt;
+&lt;/<span class="tagname">form</span>&gt;</pre>
+  <p> A list of all supported properties with examples for each is provided in 
+    the <a href="reference.html">Reference</a> section of this manual, or you 
+    can use the <a href="codegen.html">Code Generator</a> to select all the properties 
+    you want from a list and have the code generated for you automatically.</p>
+  <h2>Step 6: (Optional) Providing a List of Images</h2>
+  <p>By default, the Insert Image tool in <em>Editize </em>will prompt the user 
+    for the URL of the image he or she wishes to insert. Since it can be fairly 
+    tedious to hand-type the URL for every image, <em>Editize </em>also provides 
+    a method to specify a list of images that users may quickly choose from.</p>
+  <p>The <code>ImgListUrl</code> property lets you set a URL from which <em>Editize 
+    </em>will download a list of images to present it to the user in the Insert 
+    Image dialog. The given URL may refer to a server-side script (e.g. to provide 
+    an up-to-date list of images stored in a content management system). If a 
+    static list of images is all that you need, you can simply point <em>Editize</em> 
+    to a text file of the required format residing on your server.</p>
+  <p>The <a href="reference.html#imglisturl">documentation for <code>imglisturl</code></a> 
+    in the <a href="reference.html">Reference</a> section of this manual explains 
+    the required format of the image list. A sample script written in PHP called 
+    <code>imglist.php</code> that produces a list of all the images in a given 
+    directory and its subdirectories is provided in the <code>php</code> folder 
+    of this distribution</p>
+  <h2><a name="vsdotnet"></a>Using Editize in Visual Studio .NET</h2>
+  <p>Using ASP.NET Server Controls such as the <em>Editize</em> API for ASP.NET 
+    is very easy in Microsoft Visual Studio.NET. All you need to do is add the 
+    <em>Editize</em> ASP.NET Server Control (<code>Editize</code>) 
+    to your Visual Studio .NET Toolbox, and Visual Studio .NET will take care 
+    of almost everything.</p>
+  <p>To add the <em>Editize </em>ASP.NET Server Control to your Toolbox, open 
+    the Toolbox window if it is not already open and expand the Web Forms section 
+    of the Toolbox. Right-click on the background of the Toolbox and select &quot;Customize 
+    Toolbox...&quot; from the pop-up menu. In the Customize Toolbox window, select 
+    the &quot;.NET Framework Components&quot; tab and click the &quot;Browse...&quot; 
+    button. Browse to and select the <code>EditizeDotNet.dll</code> file you received 
+    with this distribution (make sure it is given a permanent home, where Visual 
+    Studio .NET will be able to find it in future). The <code>Editize</code> and 
+    <code>EditizeSubmitButton</code> components will be added to the list of .NET 
+    Framework Components. Check only the <code>Editize </code>component (<code>EditizeSubmitButton</code> is included for compatibility with older releases of <em>Editize</em>), and then click OK. You'll 
+    now see the <code>Editize</code> component listed in the Toolbox window under Web Forms.</p>
+  <p>To add the <em>Editize</em> ASP.NET Server Control to an ASP.NET page in 
+    Visual Studio, you can now simply double-click on the item in the Toolbox, 
+    or drag the item directly to your page. Visual Studio .NET will take care 
+    of registering the <code>TagPrefix</code> at the top of the page, copying 
+    the <code>EditizeDotNet.dll</code> file into the <code>bin</code> directory 
+    of your Web Application, and adding a reference to the library to make Visual 
+    Studio .NET's IntelliSense and Properties Window features aware of the control.</p>
+  <p>Once you've added an <em>Editize</em> ASP.NET Server Control to an ASP.NET 
+    page, you can edit its properties directly in the Properties Window, where 
+    all of the properties are listed in appropriate categories and with short 
+    descriptions. To assign an event handler to the <code>ContentChanged</code> 
+    event supported by the Control (see <a href="reference.html#events">Control 
+    Events</a> in the <a href="reference.html">Reference</a> section), all you 
+    have to do is double-click on the <em>Editize</em> Control in the page while 
+    in Design view; Visual Studio .NET will create the event handler method and 
+    will take you to it so that you can write the code for it by hand.</p>
+  <p>Please note that, at this time, you must still deploy the <code>editize.jar</code>, 
+    <code>kunstsoff.jar</code>, <code>osx.html</code>, and license files on your 
+    site manually.</p>
+  <h2><a name="upgrade" id="upgrade"></a>Upgrading to a New Version</h2>
+  <p>In most cases, all you need to do to upgrade to a new release of <em>Editize</em> is to upload the new versions of <code>editize.jar</code>, <code>editize.js</code>, <code>osx.html</code>, and optionally <code>kunststoff.jar</code> over the old versions already on your server. It is very important that you replace all of these files, as changes made to one in a particular release often rely on changes made to another.</p>
+  <p>Occasionally, we add new features to <em>Editize</em>. Very occasionally, we change the way the APIs work. In both of these cases, you may need to make some changes to the page(s) on your site(s) that use Editize to make the new version work the way you expect it to. Always read the <a href="../history.html">Revision History</a> for the new release to find out when such changes are made.</p>
+  <div id="footer">
+    <p><a href="index.html">Getting Started</a> | <a href="codegen.html">Code 
+      Generator </a> | <a href="reference.html">API Reference</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) Manual</title>
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+</head>
+<body>
+<div id="top"><img src="images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <span class="tab this">General</span> <a href="asp/index.html" class="tab">ASP</a> 
+  <a href="aspdotnet/index.html" class="tab">ASP.NET</a> <a href="javascript/index.html" class="tab">JavaScript</a> 
+  <a href="php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Introduction</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="quickstart.html">Quick Start Guide</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="features.html">List of Features</a><img src="images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="troubleshooting.html">Troubleshooting</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="history.html">Revision History</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="license.html">License Agreement</a><img src="images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center">
+  <h1>List of Features</h1>
+<p><em>Editize</em> provides a WYSIWYG interface for your users to edit simple 
+  HTML documents in forms on your Web site. It provides two types of formatting 
+  features:</p>
+<ul>
+  <li> Paragraph-level formatting</li>
+  <li> Character-level formatting</li>
+</ul>
+<p>These two sets of tools are clearly separated in the applet's toolbar. All 
+  of these features are explained in detail in this section.</p>
+  <h2>Paragraph Formatting Features</h2>
+<p> Paragraphs may be assigned one of 5 styles in <em>Editize</em>. In addition, 
+  paragraphs may be left-, center-, or right-aligned, may be indented, and may be items in bulleted 
+  or numbered lists.</p>
+  <h3>Paragraph Styles</h3>
+<dl>
+  <dt><strong>Normal</strong></dt>
+  <dd>The default paragraph style, this corresponds to a <code>&lt;p&gt;</code> 
+    tag in the output document. If you assign a font, size, or color to the Normal 
+    style (see the documentation for your chosen API), you should assign the same 
+    attributes to the <code>&lt;p&gt;</code> tag with Cascading Style<br>
+    Sheets when you display the output documents.</dd>
+  <dt><strong>Heading</strong></dt>
+  <dd>For major headings, this style corresponds to a <code>&lt;h1&gt;</code> 
+    tag in the output document. If you assign a font, size, or color to the Heading 
+    style (see the documentation for your chosen API), you should assign the same 
+    attributes to the <code>&lt;h1&gt;</code> tag with Cascading Style Sheets 
+    when you display the output documents.</dd>
+  <dt><strong>Subheading</strong></dt>
+  <dd>For minor headings, this style corresponds to a <code>&lt;h2&gt;</code> 
+    tag in the output document. If you assign a font, size, or color to the Heading 
+    style (see the documentation for your chosen API), you should assign the same 
+    attributes to the <code>&lt;h2&gt;</code> tag with Cascading Style Sheets 
+    when you display the output documents.</dd>
+  <dt><strong>Monospaced</strong></dt>
+  <dd>Mainly for blocks of code, this is the only paragraph style that allows 
+    multiple spaces, and corresponds to a <code>&lt;pre&gt;</code> tag in the 
+    output document. The font for this paragraph style is fixed, but you can set 
+    a background color to set monospaced paragraphs apart (see the documentation 
+    for your chosen API). If you assign a background color, you should assign 
+    the same color to the <code>&lt;pre&gt;</code> tag using Cascading Style Sheets 
+    when you display the output documents.</dd>
+  </dl>
+  <h3>Paragraph Alignment</h3>
+  <p>All paragraph styles except Monospaced allow an alignment to be set. For 
+    Normal (<code>&lt;p&gt;</code>), Heading (<code>&lt;h1&gt;</code>), and Subheading 
+    (<code>&lt;h2&gt;</code>) paragraphs, this is reflected by an <code>align</code> 
+    attribute in the output document. For Inset (<code>&lt;blockquote&gt;</code>) 
+    paragraphs, a <code>style</code> attribute is used instead, as <code>&lt;blockquote&gt;</code> 
+    does not support the align attribute.</p>
+  <h3>Indenting</h3>
+  <p>For citations, notes, and other paragraphs that should be set apart, indenting a block wraps it in a <code>&lt;blockquote&gt;</code> tag in the output document. If you assign a font, size, or color to indented blocks (see the documentation for your chosen API), you should assign the same attributes to the <code>&lt;blockquote&gt;</code> tag with Cascading Style Sheets when you display the output documents.</p>
+  <h3>Lists</h3>
+  <p><em>Editize</em> supports bullet lists (<code>&lt;ul&gt;</code>) and numbered 
+  lists (<code>&lt;ol&gt;</code>). At present, nested lists cannot be created using <em>Editize</em>'s WYSIWYG tools.</p>
+  <h2>Character Formatting Features</h2>
+<p>Character-level formatting is provided with the following features:</p>
+  <dl>
+    <dt> <strong>Bold</strong></dt>
+    <dd>Bold text, maps to a <code>&lt;b&gt;</code> tag in the output.</dd>
+    <dt><strong>Italics</strong></dt>
+    <dd>Italic text, maps to a <code>&lt;i&gt;</code> tag in the output.</dd>
+    <dt><strong>Underlined</strong></dt>
+    <dd><strong></strong>Underlined text, maps to a <code>&lt;u&gt;</code> tag 
+      in the output.</dd>
+    <dt><strong>Highlighted</strong></dt>
+    <dd>Highlighted text, displayed in a configurable font color (red by default). 
+      This is intended for use to highlight key words in articles, for example. 
+      Highlighted text maps to a <code>&lt;span class=&quot;highlighted&quot;&gt;</code> 
+      tag in the output document. You should assign whatever highlighting color 
+      you choose to the <code>highlighted</code> CSS class when you display the 
+      output document.</dd>
+    <dt><strong>Inline Code</strong></dt>
+    <dd>Monospaced text, maps to a <code>&lt;code&gt;</code> tag in the output.</dd>
+    <dt><strong>Hyperlinks</strong></dt>
+    <dd>Allows you to insert hyperlinks (<code>&lt;a href&gt;</code> tags) into 
+      the document. Users are asked whether each link should open in the default 
+      window/frame, or in a new window (<code>target=&quot;_blank&quot;</code>).</dd>
+  </dl>
+  <h2>Other Features</h2>
+<p>In addition to the formatting features outlined above, <em>Editize </em>supports:</p>
+  <dl>
+    <dt><strong>Images</strong></dt>
+    <dd><em>Editize </em>supports inserting images, both inline and left/right 
+      aligned (floating). An easy-to-use dialog lets you specify the information 
+      about each image as you insert it. You can even give Editize a URL from 
+      which it will download a list of images available for insertion. Users can 
+      then choose from that list of images or type in the URLs for other images.</dd>
+    <dt><strong>Tables</strong></dt>
+    <dd><em>Editize </em>supports creating and editing content within simple tables. 
+      A simple dialog lets you specify the number of rows and columns, and an 
+      advanced version of the dialog lets you specify more details about the look 
+      of the table.</dd>
+    <dt><strong>Line Breaks</strong></dt>
+    <dd>In addition to paragraphs, <em>Editize</em> supports line breaks within 
+      paragraphs. To create a line break in <em>Editize</em>, users may type Shift-Enter.</dd>
+    <dt><strong>System Clipboard Access</strong></dt>
+    <dd><strong><em></em></strong><em>Editize </em>supports standard cut/copy/paste 
+      cliboard functionality both internally and with other programs on the user's 
+      system. In Windows, <em>Editize </em>will import basic formatting when you 
+      paste text in from Microsoft applications such as Internet Explorer and 
+      Office. To access the clipboard functions, users may right-click in the 
+      text region for a pop-up menu. Keyboard shortcuts are also available (as 
+      shown in the menu). </dd>
+    <dt> <strong>Multi-level undo</strong></dt>
+    <dd>Just like modern Word processors, <em>Editize </em>allows users to undo 
+      and redo multiple changes to a document (including formatting). <em>Editize 
+      </em>recalls the last 100 edits performed by a user in a given editing session. 
+      To access the undo/redo functions, users may right-click in the text region 
+      for a pop-up menu. Keyboard shortcuts are also available (as shown in the 
+      menu).</dd>
+    <dt><strong>Code View</strong></dt>
+    <dd><em>Editize</em> supports an option that will display 
+      a tabbed interface, with the default tab presenting the familiar WYSIWYG 
+      view, and a secondary tag providing direct, code-level access to the document. 
+      We discourage the use of this 'Code View' tab, since it can easily be used 
+      to create HTML that is incompatible with the established look of your site 
+      (and possibly even incompatible with <em>Editize</em>'s HTML rendering engine!); 
+      however, in cases where it is appropriate, this feature can be enabled.</dd>
+  </dl>
+      <div id="footer"> 
+        <p><a href="index.html">Introduction</a> | <a href="quickstart.html">Quick 
+          Start Guide</a> | <a href="features.html">List of Features</a> | <a href="history.html">Revision 
+          History</a> | <a href="license.html">License Agreement</a></p>
+      </div>
+</div>
+</body>
+</html>

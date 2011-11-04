@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>The Editize(TM) Manual</title>
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+	<meta http-equiv="imagetoolbar" content="no"/>
+</head>
+<body>
+<div id="top"><img src="images/logo2.gif" width="250" height="80" border="0" /></div>
+
+<div id="nav"> <span class="tab this">General</span> <a href="asp/index.html" class="tab">ASP</a> 
+  <a href="aspdotnet/index.html" class="tab">ASP.NET</a> <a href="javascript/index.html" class="tab">JavaScript</a> 
+  <a href="php/index.html" class="tab">PHP</a> </div>
+
+<div id="left"> 
+  <div id="subnav"> <a href="index.html">Introduction</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="quickstart.html">Quick Start Guide</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="features.html">List of Features</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="troubleshooting.html">Troubleshooting</a><img src="images/marker.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="history.html">Revision History</a><img src="images/x.gif" width="15" height="9" border="0"> 
+    <hr noshade align="right" />
+    <a href="license.html">License Agreement</a><img src="images/x.gif" width="15" height="9" border="0"></div>
+</div>
+
+<div id="center">
+  <h1>Troubleshooting</h1>
+  <p><em>Editize</em> is a simple product with complex technology behind it. As 
+    such, there are a number of little things that have to be set up 'just right' 
+    for it to function correctly. In this section, we'll tackle some of the most 
+    frequently encountered problems along with their solutions.</p>
+  <p>Known problems with <em>Editize</em> are documented in the <tt>readme.txt</tt> file included with this distribution. If you suspect you have encountered a bug in <em>Editize</em>, check there for details. </p>
+  <p>Feel free to contact <a href="http://editize.com/support.php">Customer Support</a> 
+    if you are unable to resolve your problem with the instructions provided here.</p>
+  <h2>General Java Applet Errors</h2>
+  <p><strong>The License File for Editize in this Web page is not found.</strong></p>
+  <p>If the <em>Editize </em>applet displays a message box with this error message, 
+    it means the Java Plug-In was not able to download the license file for your 
+    Web site. This file should generally be called <code>editize.<em>hostname</em>.lic</code>, 
+    where <code><em>hostname</em></code> is the hostname of your Web site, and 
+    should be placed in the same publically-accessible (i.e. not password-protected) 
+    directory of your Web site as <code>editize.jar</code>.</p>
+  <p>Assuming you have placed this file where it belongs, it is possible that 
+    your organization's proxy server is interfering with the Java Plug-in's ability 
+    to download the license file. This usually occurs when a Microsoft Proxy Server 
+    (ISA) is in use. Microsoft Proxy Server uses a non-standard user authentication 
+    method called NTLM (a.k.a. challenge-response) that the Java Plug-in did not support until version 1.4.2. Download and install the latest Java Plug-In from <a href="http://www.java.com/">http://www.java.com/</a> to correct this problem.</p>
+  <p>Another possibility is that your Web server is set up not to allow <code>.lic</code> files to be downloaded. The version of IIS included in Windows Server 2003, in particular, is configured this way by default. Try renaming your license file so that it has a different extension (e.g. <code>editize.<em>hostname</em>.jpg</code>) and then use the <code>licensefileext</code> property (see the Reference section for your chosen API) to tell Editize what that new extension is. </p>
+  <p><strong>java.lang.ClassFormatError: com/editize/EditizeApplet (bad magic 
+    number)</strong></p>
+  <p>This error indicates that the Java Plug-In tried to download the <code>editize.jar</code> 
+    file but instead your Web server sent it something else (e.g. a custom 404 
+    error page). Usually this will happen if you have not correctly set the <code>codebase</code> 
+    property of the Editize API you are using.</p>
+  <p>Try typing the URL for <code>editize.jar</code> on your server into your 
+    Web browser. Does it download correctly? If so, try running <em>Editize</em> 
+    again. When the error occurs, open the Java Console for your browser (right-click 
+    the Java icon in the Windows System Tray) and look for a more technically 
+    detailed error message. A URL in the error message should indicate where the 
+    Java Plug-In is trying to download <code>editize.jar</code> from. Adjust the 
+    <code>codebase</code> property of your selected API to make sure this is pointing 
+    to the actual location of the <code>editize.jar</code> file.</p>
+  <p>The error will probably make it look like it's trying to download <code>com/editize/EditizeApplet.class</code>, but this actually the fallback that the plug-in tries when it fails to retrieve <code>editize.jar</code> from the same location.</p>
+  <p><strong>java.lang.ClassNotFoundException: com.editize.EditizeApplet</strong></p>
+  <p>The this error indicates that the Java Plug-In tried to download the <code>editize.jar</code> 
+    file but was unable to do so for some reason. Possible causes of this problem 
+    include:</p>
+  <ul>
+    <li>You have not correctly set the <code>codebase</code> property of the Editize 
+      API you are using.</li>
+    <li><code>editize.jar</code> is not in the correct location on your server.</li>
+    <li><code>editize.jar</code> is in a directory that is protected by a password.</li>
+    <li>Your organization's firewall prevents the Java Plug-In from downloading 
+      <code>editize.jar</code>.</li>
+  </ul>
+  <p>Try typing the URL for <code>editize.jar</code> on your server into your 
+    Web browser. Does it download correctly? If so, try running <em>Editize</em> 
+    again. When the error occurs, open the Java Console for your browser (right-click 
+    the Java icon in the Windows System Tray) and look for a more technically 
+    detailed error message. A URL in the error message should indicate where the 
+    Java Plug-In is trying to download <code>editize.jar</code> from.  Adjust the <code>codebase</code> 
+    property of your selected API to make sure this is pointing to the actual 
+    location of the <code>editize.jar</code> file.</p>
+  <p>The error will probably make it look like it's trying to download <code>com/editize/EditizeApplet.class</code>, but this actually the fallback that the plug-in tries when it fails to retrieve <code>editize.jar</code> from the same location.</p>
+  <p><strong>java.lang.ClassNotFoundException: com.sitepoint.rapidapps.rapidedit.RapidEditApplet</strong></p>
+  <p>The class name for the <em>Editize </em>applet was changed as of <em>Editize</em> 
+    2.0 to <code>com.editize.EditizeApplet</code>. If you get an error message 
+    with 'rapidedit' in it, this means you're using an outdated version of your 
+    selected <em>Editize </em>API (<code>editize.php</code>, <code>editizedotnet.dll</code>, 
+    <code>editize.wsc</code>, or <code>editize.js</code>). Replace the version 
+    of the <em>Editize </em>API on your server with the one that came with the 
+    version of <em>Editize </em>that you wish to use.</p>
+  <h2>International Character Sets</h2>
+  <p><strong>When my users try to input Chinese or other non-Latin characters 
+    into an <em>Editize</em>, all they see are little boxes where the characters 
+    should be.</strong></p>
+  <p>As a Java applet, <em>Editize</em>  supports international (including 
+    double byte) character sets. The source of the problem here is that <em>Editize</em> 
+    uses &quot;Times New Roman&quot; as its default font, which does not contain 
+    characters for Chinese text.</p>
+  <p>Try setting the <code>basefontface</code> property of your selected API to 
+    a font that you know contains the required characters. If <em>Editize </em>still 
+    doesn't display the text correctly, please contact our <a href="http://editize.com/support.php">Customer 
+    Support</a> department so we can help diagnose the problem.</p>
+  <h2>The ASP.NET API</h2>
+  <p><strong>My form uses ASP.NET LinkButtons, and changes to the content in <em>Editize</em> 
+    are not submitted.</strong></p>
+  <p><em>Editize</em> relies on the client-side 'onsubmit' event handler of the 
+    form to submit the updated document. Unfortunately, because of an oversight 
+    on the part of Microsoft, this event is not fired when the form is submitted 
+    with a LinkButton.</p>
+  <p>Fortunately, you can tweak your code to get the LinkButton to trigger the 
+    <em>Editize</em> field submission. Here's how it's done (in your page's Page_Load 
+    method):</p>
+  <pre>MyLinkButton.Attributes.Add(&quot;onclick&quot;,&quot;return __submitEditize();&quot;);</pre>
+  <p>Do this for each LinkButton that you want to make submit the <em>Editize</em> 
+    field when it is clicked.</p>
+  <h2>The ASP API</h2>
+  <p><strong>I get an error message when I try to register or use the <em>Editize</em> 
+    API for ASP (<code>editize.wsc</code>).</strong></p>
+  <p>In all likelihood, you need to update the version of Microsoft Windows Script 
+    installed on your server. As of this writing, the latest version is 5.6, and 
+    may be <a href="http://msdn.microsoft.com/downloads/sample.asp?url=/msdn-files/027/001/733/msdncompositedoc.xml">downloaded 
+    for free</a> from Microsoft.</p>
+  <p>Another possibility is that you have placed the <code>editize.wsc</code> 
+    file on a mapped network drive. Windows Script Components must always be placed 
+    on a local drive, and you'll get a fairly ugly and nondescript ASP error message 
+    if you try to use one that isn't.</p>
+  <h2>The JavaScript API</h2>
+  <p><strong>I keep getting JavaScript errors when I try to use the <em>Editize</em> 
+    API for JavaScript to edit an existing document.</strong></p>
+  <p>JavaScript does not like apostrophes (<code>'</code>) or line breaks to appear 
+    within a string. Since both of these characters may appear in an HTML document 
+    that you supply for <em>Editize</em> to edit, you need to replace them with 
+    special character codes to prevent JavaScript errors from occurring. Apostrophes 
+    must be escaped with backslashes (<code>\'</code>) and each line break must 
+    be replaced with <code>\n</code>.</p>
+  <p>See the <tt>index.php</tt> and <tt>default.asp</tt> sample scripts in the <tt>javascript</tt> folder 
+    of the <em>Editize</em> distribution for examples of how these special characters may 
+    be replaced in PHP and ASP, respectively. Similar techniques may be applied 
+    in most any other server-side language.</p>
+  <p><strong><a name="cfhowto"></a>Can the JavaScript API for Editize be used 
+    with ColdFusion?</strong></p>
+  <p>Absolutely! You just need to take care of the special characters, as discussed 
+    under the previous heading.</p>
+  <p>ColdFusion has a function named <code>JSStringFormat</code> that takes care 
+    of special characters in JavaScript strings. Assuming you have the document 
+    to be edited in a ColdFusion variable named <code>htmlCode</code>, here's 
+    how you would use <code>JSStringFormat</code> to display it with the JavaScript 
+    API for <em>Editize</em>:</p>
+  <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;editize.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var ed = new Editize();
+ed.name = &quot;example&quot;;
+ed.display(&quot;<strong>&lt;cfoutput&gt;#JSStringFormat(#htmlCode#)#&lt;/cfoutput&gt;</strong>&quot;);
+&lt;/script&gt;</pre>
+  <div id="footer"> 
+        <p><a href="index.html">Introduction</a> | <a href="quickstart.html">Quick 
+          Start Guide</a> | <a href="features.html">List of Features</a> | <a href="history.html">Revision 
+          History</a> | <a href="license.html">License Agreement</a></p>
+  </div>
+</div>
+</body>
+</html>
