@@ -8,6 +8,12 @@ Editize was created and developed by [Kevin Yank][kevinyank] for SitePoint Pty L
 [editize]: http://editize.com/
 [kevinyank]: http://kevinyank.com/
 
+## Project Status
+
+Editize is unsupported software, released as-is for the benefit of the community and Editize customers, who can now use it in new projects without buying additional licenses. SitePoint does not provide support of any kind for the open source version of Editize.
+
+If you do need help with Editize, try emailing [Kevin Yank][kevinyank]. He might be able to help out in his spare time.
+
 ## Why (or Why Not) Editize?
 
 Editize was a product of its time. First released on May 17th, 2002 (after its former life as Octopus, a WYSIWYG editor for the proprietary markup format used by the content management system of sitepoint.com), it was developed as a Java applet because the JavaScript capabilities of the web browsers of the time (which still included Netscape Navigator 4 and Internet Explorer 4) were not yet sophisticated enough to support WYSIWYG editing of HTML content.
